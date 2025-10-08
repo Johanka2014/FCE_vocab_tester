@@ -60,6 +60,11 @@
         .incorrect .feedback-icon.incorrect-icon {
             display: inline;
         }
+        /* Style for the hub tiles to ensure they are the same height */
+        .hub-tile {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -78,30 +83,42 @@
                 <h2 class="text-4xl font-bold text-gray-800">Welcome!</h2>
                 <p class="text-lg text-gray-600 mt-2">Choose an activity below to start practicing.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="flex flex-wrap justify-center gap-8">
                 <!-- Tile 1: Multiple Choice -->
-                <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center transition transform hover:-translate-y-2">
+                <div class="hub-tile bg-white p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2">
                     <h3 class="text-2xl font-bold text-pink-600 mb-4">Multiple Choice Challenge</h3>
                     <p class="text-gray-600 mb-6 flex-grow">Test your knowledge by choosing the word that best completes each sentence. A classic way to build your vocabulary.</p>
-                    <button id="start-mc-btn" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-pink-600 transition shadow-md w-full">Start Activity</button>
+                    <button id="start-mc-btn" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-pink-600 transition shadow-md w-full mt-auto">Start Activity</button>
                 </div>
                 <!-- Tile 2: Unscramble -->
-                <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center transition transform hover:-translate-y-2">
+                <div class="hub-tile bg-white p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2">
                     <h3 class="text-2xl font-bold text-purple-600 mb-4">Unscramble the Words</h3>
                     <p class="text-gray-600 mb-6 flex-grow">Put your brain to the test! Rearrange the jumbled letters to form the correct word or phrase related to likes and dislikes.</p>
-                    <button id="start-gap-btn" class="bg-purple-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-600 transition shadow-md w-full">Start Activity</button>
+                    <button id="start-gap-btn" class="bg-purple-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-600 transition shadow-md w-full mt-auto">Start Activity</button>
                 </div>
                 <!-- Tile 3: Sorting -->
-                <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center transition transform hover:-translate-y-2">
+                <div class="hub-tile bg-white p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2">
                     <h3 class="text-2xl font-bold text-sky-600 mb-4">Action Word Sorting</h3>
                     <p class="text-gray-600 mb-6 flex-grow">Drag and drop action words into the correct categories based on which part of the body performs them. A fun, interactive challenge!</p>
-                    <button id="start-sort-btn" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-sky-600 transition shadow-md w-full">Start Activity</button>
+                    <button id="start-sort-btn" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-sky-600 transition shadow-md w-full mt-auto">Start Activity</button>
                 </div>
                  <!-- Tile 4: Sentence Completion -->
-                <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center transition transform hover:-translate-y-2">
+                <div class="hub-tile bg-white p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2">
                     <h3 class="text-2xl font-bold text-orange-600 mb-4">Sentence Completion</h3>
                     <p class="text-gray-600 mb-6 flex-grow">Complete the sentences with the correct form of an action word. This will test your grammar and vocabulary in context.</p>
-                    <button id="start-sentence-btn" class="bg-orange-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-orange-600 transition shadow-md w-full">Start Activity</button>
+                    <button id="start-sentence-btn" class="bg-orange-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-orange-600 transition shadow-md w-full mt-auto">Start Activity</button>
+                </div>
+                <!-- Tile 5: Confusing Words -->
+                <div class="hub-tile bg-white p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold text-green-600 mb-4">Confusing Words</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Choose the correct word from the pair of commonly confused words to complete the sentence.</p>
+                    <button id="start-confusing-btn" class="bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 transition shadow-md w-full mt-auto">Start Activity</button>
+                </div>
+                 <!-- Tile 6: Make, Do & Take -->
+                <div class="hub-tile bg-white p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold text-indigo-600 mb-4">Make, Do & Take</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Complete the sentences with the correct form of 'make', 'do', or 'take'. A common challenge for FCE students!</p>
+                    <button id="start-mdt-btn" class="bg-indigo-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-600 transition shadow-md w-full mt-auto">Start Activity</button>
                 </div>
             </div>
         </section>
@@ -116,7 +133,7 @@
                     <div id="mc-progress-bar" class="bg-teal-500 h-2.5 rounded-full" style="width: 0%"></div>
                 </div>
                 <div class="flex justify-between mb-4 text-sm font-medium text-gray-600">
-                    <span id="mc-question-counter">Question 1/12</span>
+                    <span id="mc-question-counter">Question 1/13</span>
                     <span id="mc-score">Score: 0</span>
                 </div>
                 <div id="mc-quiz-container">
@@ -238,6 +255,57 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Confusing Words Section -->
+        <section id="activity-confusing" class="activity-section">
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+                 <h2 class="text-2xl font-bold text-center mb-2 text-green-600">Confusing Words</h2>
+                 <p class="text-center text-gray-500 mb-6">Choose the correct word to complete the sentence.</p>
+                <div id="confusing-container">
+                    <p id="confusing-question" class="text-lg mb-6 text-center leading-relaxed"></p>
+                    <div id="confusing-options" class="flex justify-center gap-4">
+                        <!-- Option buttons will be injected here -->
+                    </div>
+                </div>
+                <div id="confusing-feedback" class="mt-6 text-center font-bold"></div>
+                <div class="flex justify-center mt-6">
+                    <button id="confusing-next-btn" class="bg-teal-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600 transition shadow-md hidden">Next</button>
+                </div>
+                 <div id="confusing-results" class="hidden text-center mt-6">
+                    <h3 class="text-2xl font-bold">Activity Complete!</h3>
+                     <p class="text-lg mt-2">Your final score is <span id="confusing-final-score" class="font-bold text-teal-600"></span>.</p>
+                    <button id="confusing-restart-btn" class="mt-4 bg-amber-400 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-amber-500 transition shadow-md">Start Over</button>
+                </div>
+                <div class="border-t mt-8 pt-4 text-center">
+                    <button class="back-to-hub-btn text-gray-600 hover:text-teal-600 font-semibold">‹ Back to Menu</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Make, Do, Take Section -->
+        <section id="activity-mdt" class="activity-section">
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+                 <h2 class="text-2xl font-bold text-center mb-2 text-indigo-600">Make, Do & Take</h2>
+                 <p class="text-center text-gray-500 mb-6">Complete the sentences with the correct form of 'make', 'do', or 'take'.</p>
+                <div id="mdt-container">
+                    <p id="mdt-question" class="text-lg mb-4 text-center leading-relaxed"></p>
+                </div>
+                <div id="mdt-feedback" class="mt-6 text-center font-bold"></div>
+                <div class="flex justify-center mt-6 space-x-4">
+                    <button id="mdt-check-btn" class="bg-indigo-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-600 transition shadow-md">Check</button>
+                    <button id="mdt-next-btn" class="bg-teal-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600 transition shadow-md hidden">Next</button>
+                </div>
+                 <div id="mdt-results" class="hidden text-center mt-6">
+                    <h3 class="text-2xl font-bold">Activity Complete!</h3>
+                     <p class="text-lg mt-2">Your final score is <span id="mdt-final-score" class="font-bold text-teal-600"></span>.</p>
+                    <button id="mdt-restart-btn" class="mt-4 bg-amber-400 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-amber-500 transition shadow-md">Start Over</button>
+                </div>
+                <div class="border-t mt-8 pt-4 text-center">
+                    <button class="back-to-hub-btn text-gray-600 hover:text-teal-600 font-semibold">‹ Back to Menu</button>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="text-center py-6 mt-8">
@@ -249,7 +317,7 @@
 
             // --- STATE MANAGEMENT ---
             const state = {
-                currentActivity: 'hub', // hub, mc, gap, sort, sentence
+                currentActivity: 'hub', // hub, mc, gap, sort, sentence, confusing, mdt
                 mc: {
                     questions: [
                         { q: "British people and people in my country have a lot ______.", options: ["in common", "in similar", "in particular"], a: "in common" },
@@ -307,6 +375,58 @@
                         { q: "Sally ______ with relief when she eventually saw him.", a: "sighed" },
                     ],
                     currentIndex: 0,
+                },
+                confusing: {
+                    questions: [
+                        { q_start: "Twenty years ago, very few people owned computers, but", q_end: "a lot of people have them.", options: ["actually", "now"], a: "now" },
+                        { q_start: "My poor pronunciation sometimes", q_end: "my ability to communicate in English.", options: ["affects", "effects"], a: "affects" },
+                        { q_start: "I haven't seen her", q_end: "this morning.", options: ["already", "yet"], a: "yet" },
+                        { q_start: "I have always been", q_end: "snakes and spiders.", options: ["worried about", "afraid of"], a: "afraid of" },
+                        { q_start: "My limited vocabulary", q_end: "me from getting a good grade in the FCE.", options: ["avoided", "prevented"], a: "prevented" },
+                        { q_start: "At three o'clock, I", q_end: "the children from school.", options: ["bring", "fetch"], a: "fetch" },
+                        { q_start: "If you learn the vocabulary in this book, you have a better", q_end: "of passing the FCE.", options: ["chance", "possibility"], a: "chance" },
+                        { q_start: "My English isn't so good. I'm always making", q_end: "mistakes.", options: ["continuous", "continual"], a: "continual" },
+                        { q_start: "Last summer we had a", q_end: "holiday in Italy.", options: ["formidable", "wonderful"], a: "wonderful" },
+                        { q_start: "'Did you enjoy the party?' 'Yes, it was", q_end: ".'", options: ["fun", "funny"], a: "fun" },
+                        { q_start: "I", q_end: "swimming and running every day.", options: ["go", "play"], a: "go" },
+                        { q_start: "Molly asked me if I would like to", q_end: "her to the cinema.", options: ["go with", "follow"], a: "go with" },
+                        { q_start: "You can borrow my car, but if you", q_end: "it, I'll never talk to you again!", options: ["harm", "damage"], a: "damage" },
+                        { q_start: "I like working here. It's a good", q_end: ".", options: ["job", "work"], a: "job" },
+                        { q_start: "She's such a", q_end: "girl; she's always helping people.", options: ["kind", "sympathetic"], a: "kind" },
+                        { q_start: "I asked him to", q_end: "me £20 until Monday.", options: ["borrow", "lend"], a: "lend" },
+                        { q_start: "My mother asked me to", q_end: "the table.", options: ["lay", "lie"], a: "lay" },
+                        { q_start: "I love being in the", q_end: "in spring.", options: ["countryside", "nature"], a: "countryside" },
+                        { q_start: "I thought the painting was worth a lot of money, but in fact it was", q_end: ".", options: ["priceless", "worthless"], a: "worthless" },
+                        { q_start: "I sat on the beach at dawn and watched the sun", q_end: ".", options: ["raise", "rise"], a: "rise" },
+                        { q_start: "When we go to town, could you", q_end: "me to buy some milk?", options: ["remember", "remind"], a: "remind" },
+                        { q_start: "From the top of the hill, you have a marvellous", q_end: "of the town.", options: ["view", "scenery"], a: "view" },
+                        { q_start: "He's a", q_end: "boy and gets upset easily.", options: ["sensible", "sensitive"], a: "sensitive" },
+                        { q_start: "When you come to school tomorrow, don't forget to", q_end: "your dictionary.", options: ["bring", "take"], a: "bring" }
+                    ],
+                    currentIndex: 0,
+                    score: 0
+                },
+                mdt: {
+                    questions: [
+                        { q: "The company is ___ a large profit, but in the meantime they're ___ a lot of damage to the environment.", a: ["making", "doing"] },
+                        { q: "She was asked to ___ a quick speech, but she ___ her time.", a: ["make", "took"] },
+                        { q: "After we've ___ our homework, we should ___ the washing up.", a: ["done", "do"] },
+                        { q: "___ a look at all these mistakes you've ___!", a: ["Take", "made"] },
+                        { q: "Shall we ___ a taxi or go by train?", a: ["take"] },
+                        { q: "At first, he ___ a great effort to ___ an interest in his lessons.", a: ["made", "take"] },
+                        { q: "This is a photograph I ___ of some friends we ___ when we were on holiday.", a: ["took", "made"] },
+                        { q: "She told me to ___ a seat, and then went to ___ some phone calls.", a: ["take", "make"] },
+                        { q: "___ a test is a bit like ___ a crossword: you finish it eventually!", a: ["Doing", "doing"] },
+                        { q: "The policeman ___ my name and address, and ___ a few notes.", a: ["took", "made"] },
+                        { q: "We had to ___ a lot of work before we began to ___ any money.", a: ["do", "make"] },
+                        { q: "The conference ___ place in January, and since then we've ___ a lot of business with the other companies there.", a: ["took", "done"] },
+                        { q: "You should really ___ my advice and hire somebody to ___ your ironing, washing and other housework.", a: ["take", "do"] },
+                        { q: "After I had ___ the bed, he lay down and ___ his medicine.", a: ["made", "took"] },
+                        { q: "It won't ___ any harm to ___ some enquiries.", a: ["do", "make"] },
+                        { q: "Our company ___ a loss in its first year, but now we're ___ well.", a: ["made", "doing"] }
+                    ],
+                    currentIndex: 0,
+                    score: 0
                 }
             };
             
@@ -316,13 +436,17 @@
                 mc: document.getElementById('activity-mc'),
                 gap: document.getElementById('activity-gap'),
                 sort: document.getElementById('activity-sort'),
-                sentence: document.getElementById('activity-sentence')
+                sentence: document.getElementById('activity-sentence'),
+                confusing: document.getElementById('activity-confusing'),
+                mdt: document.getElementById('activity-mdt')
             };
 
             const startMcBtn = document.getElementById('start-mc-btn');
             const startGapBtn = document.getElementById('start-gap-btn');
             const startSortBtn = document.getElementById('start-sort-btn');
             const startSentenceBtn = document.getElementById('start-sentence-btn');
+            const startConfusingBtn = document.getElementById('start-confusing-btn');
+            const startMdtBtn = document.getElementById('start-mdt-btn');
             const backToHubBtns = document.querySelectorAll('.back-to-hub-btn');
 
             function switchActivity(activityKey) {
@@ -337,6 +461,8 @@
             startGapBtn.addEventListener('click', () => switchActivity('gap'));
             startSortBtn.addEventListener('click', () => switchActivity('sort'));
             startSentenceBtn.addEventListener('click', () => switchActivity('sentence'));
+            startConfusingBtn.addEventListener('click', () => switchActivity('confusing'));
+            startMdtBtn.addEventListener('click', () => switchActivity('mdt'));
             backToHubBtns.forEach(btn => {
                 btn.addEventListener('click', () => switchActivity('hub'));
             });
@@ -651,6 +777,175 @@
                 loadSentenceQuestion();
             });
 
+            // --- CONFUSING WORDS LOGIC ---
+            const confusingElements = {
+                question: document.getElementById('confusing-question'),
+                options: document.getElementById('confusing-options'),
+                feedback: document.getElementById('confusing-feedback'),
+                nextBtn: document.getElementById('confusing-next-btn'),
+                container: document.getElementById('confusing-container'),
+                results: document.getElementById('confusing-results'),
+                finalScore: document.getElementById('confusing-final-score'),
+                restartBtn: document.getElementById('confusing-restart-btn'),
+            };
+
+            function loadConfusingQuestion() {
+                const s = state.confusing;
+                if (s.currentIndex >= s.questions.length) {
+                    showConfusingResults();
+                    return;
+                }
+                const current = s.questions[s.currentIndex];
+                confusingElements.question.innerHTML = `${current.q_start} <span class="font-bold text-gray-400">[...]</span> ${current.q_end}`;
+                confusingElements.options.innerHTML = '';
+                confusingElements.feedback.textContent = '';
+                confusingElements.nextBtn.classList.add('hidden');
+
+                current.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'p-3 border rounded-lg hover:bg-amber-100 transition focus:outline-none focus:ring-2 focus:ring-amber-400 w-40';
+                    button.onclick = (e) => checkConfusingAnswer(e.target);
+                    confusingElements.options.appendChild(button);
+                });
+            }
+
+            function checkConfusingAnswer(selectedButton) {
+                const s = state.confusing;
+                const userAnswer = selectedButton.textContent;
+                const correctAnswer = s.questions[s.currentIndex].a;
+
+                document.querySelectorAll('#confusing-options button').forEach(b => b.disabled = true);
+
+                if (userAnswer === correctAnswer) {
+                    s.score++;
+                    selectedButton.classList.add('bg-green-200');
+                    confusingElements.feedback.textContent = 'Correct!';
+                    confusingElements.feedback.className = 'mt-6 text-center font-bold text-green-500';
+                } else {
+                    selectedButton.classList.add('bg-red-200');
+                    confusingElements.feedback.textContent = `Not quite. The correct answer is "${correctAnswer}".`;
+                    confusingElements.feedback.className = 'mt-6 text-center font-bold text-red-500';
+                }
+                confusingElements.nextBtn.classList.remove('hidden');
+            }
+
+            function showConfusingResults() {
+                const s = state.confusing;
+                confusingElements.container.classList.add('hidden');
+                confusingElements.feedback.classList.add('hidden');
+                confusingElements.nextBtn.classList.add('hidden');
+                confusingElements.results.classList.remove('hidden');
+                confusingElements.finalScore.textContent = `${s.score}/${s.questions.length}`;
+            }
+
+            confusingElements.nextBtn.addEventListener('click', () => {
+                state.confusing.currentIndex++;
+                loadConfusingQuestion();
+            });
+
+            confusingElements.restartBtn.addEventListener('click', () => {
+                const s = state.confusing;
+                s.currentIndex = 0;
+                s.score = 0;
+                confusingElements.results.classList.add('hidden');
+                confusingElements.container.classList.remove('hidden');
+                confusingElements.feedback.classList.remove('hidden');
+                loadConfusingQuestion();
+            });
+            
+            // --- MAKE, DO, TAKE LOGIC ---
+            const mdtElements = {
+                question: document.getElementById('mdt-question'),
+                feedback: document.getElementById('mdt-feedback'),
+                checkBtn: document.getElementById('mdt-check-btn'),
+                nextBtn: document.getElementById('mdt-next-btn'),
+                container: document.getElementById('mdt-container'),
+                results: document.getElementById('mdt-results'),
+                finalScore: document.getElementById('mdt-final-score'),
+                restartBtn: document.getElementById('mdt-restart-btn'),
+            };
+
+            function loadMdtQuestion() {
+                const s = state.mdt;
+                if (s.currentIndex >= s.questions.length) {
+                    showMdtResults();
+                    return;
+                }
+                const current = s.questions[s.currentIndex];
+                let questionHtml = current.q;
+                
+                // Replace placeholders with input fields
+                let inputCounter = 0;
+                questionHtml = questionHtml.replace(/___/g, () => {
+                    return `<input type="text" class="mdt-input border-b-2 border-gray-400 focus:border-indigo-500 outline-none text-center w-28 mx-1">`;
+                });
+
+                mdtElements.question.innerHTML = questionHtml;
+                mdtElements.feedback.textContent = '';
+                mdtElements.checkBtn.classList.remove('hidden');
+                mdtElements.nextBtn.classList.add('hidden');
+            }
+
+            function showMdtResults() {
+                const s = state.mdt;
+                mdtElements.container.classList.add('hidden');
+                mdtElements.feedback.classList.add('hidden');
+                mdtElements.checkBtn.classList.add('hidden');
+                mdtElements.nextBtn.classList.add('hidden');
+                mdtElements.results.classList.remove('hidden');
+                mdtElements.finalScore.textContent = `${s.score}/${s.questions.length}`;
+            }
+
+            mdtElements.checkBtn.addEventListener('click', () => {
+                const s = state.mdt;
+                const currentAnswers = s.questions[s.currentIndex].a;
+                const userInputs = mdtElements.question.querySelectorAll('.mdt-input');
+                let allCorrect = true;
+
+                userInputs.forEach((input, index) => {
+                    const userAnswer = input.value.trim().toLowerCase();
+                    const correctAnswer = currentAnswers[index].toLowerCase();
+                    input.disabled = true;
+                    if (userAnswer === correctAnswer) {
+                        input.classList.add('border-green-500', 'text-green-600');
+                         input.classList.remove('border-gray-400', 'border-red-500');
+                    } else {
+                        input.classList.add('border-red-500', 'text-red-600');
+                         input.classList.remove('border-gray-400', 'border-green-500');
+                        allCorrect = false;
+                    }
+                });
+
+                if (allCorrect) {
+                    s.score++;
+                    mdtElements.feedback.textContent = 'Correct!';
+                    mdtElements.feedback.className = 'mt-6 text-center font-bold text-green-500';
+                } else {
+                    mdtElements.feedback.innerHTML = `Not quite. The correct answer${currentAnswers.length > 1 ? 's are' : ' is'}: <br> <span class="text-indigo-600">${currentAnswers.join(', ')}</span>`;
+                    mdtElements.feedback.className = 'mt-6 text-center font-bold text-red-500';
+                }
+
+                mdtElements.checkBtn.classList.add('hidden');
+                mdtElements.nextBtn.classList.remove('hidden');
+            });
+            
+            mdtElements.nextBtn.addEventListener('click', () => {
+                state.mdt.currentIndex++;
+                loadMdtQuestion();
+            });
+
+            mdtElements.restartBtn.addEventListener('click', () => {
+                const s = state.mdt;
+                s.currentIndex = 0;
+                s.score = 0;
+                mdtElements.results.classList.add('hidden');
+                mdtElements.container.classList.remove('hidden');
+                mdtElements.feedback.classList.remove('hidden');
+                mdtElements.checkBtn.classList.remove('hidden');
+                loadMdtQuestion();
+            });
+
 
             // --- INITIALIZATION ---
             function initialize() {
@@ -658,6 +953,8 @@
                 loadGapQuestion();
                 initSortGame();
                 loadSentenceQuestion();
+                loadConfusingQuestion();
+                loadMdtQuestion();
                 switchActivity('hub'); // Start with the main menu
             }
 
