@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCE Vocabulary: Module 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .draggable {
+            cursor: grab;
+            user-select: none;
+        }
+        .draggable:active {
+            cursor: grabbing;
+        }
+        .drop-target {
+            border-style: dashed;
+            transition: all 0.3s ease;
+        }
+        .drag-over {
+            background-color: #e0f2fe; 
+            border-color: #38bdf8;
+            transform: scale(1.02);
+        }
+        .activity-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #sort-words-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            min-height: 60px;
+        }
+        .sort-word {
+            padding: 6px 14px;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 9999px; /* Pill shape */
+            font-weight: 600;
+            color: #334155;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .sort-word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .sort-drop-zone .sort-word {
+            position: relative;
+            margin: 4px;
+        }
+        .sort-drop-zone {
+            min-height: 160px;
+            display: flex;
+            align-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .feedback-icon {
+            display: none;
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            background: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .correct .feedback-icon.correct-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10b981;
+        }
+        .incorrect .feedback-icon.incorrect-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+        }
+        .hub-tile {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-20 border-b border-slate-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-700 tracking-tight">FCE Module 1: The Circle of Life</h1>
+            <span class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">Practice App</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-6 max-w-7xl">
+        
+        <section id="activity-hub" class="activity-section" style="display: block;">
+            <div class="text-center mb-10 mt-4">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Choose Your Challenge</h2>
+                <p class="text-lg text-slate-600 mt-3 max-w-2xl mx-auto">Master vocabulary related to family, personality, appearance, and life stages from Module 1.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Tile 1 -->
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg transition duration-300">
+                    <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center mb-4 text-2xl">📝</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Multiple Choice</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm">Test your knowledge on appearance and personality traits by completing the sentences.</p>
+                    <button id="start-mc-btn" class="w-full bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl hover:bg-pink-600 transition duration-200">Start Quiz</button>
+                </div>
+
+                <!-- Tile 2 -->
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg transition duration-300">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4 text-2xl">🧩</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Unscramble</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm">Rearrange the jumbled letters to form words related to relationships and upbringing.</p>
+                    <button id="start-gap-btn" class="w-full bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl hover:bg-purple-600 transition duration-200">Start Anagrams</button>
+                </div>
+
+                <!-- Tile 3 -->
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg transition duration-300">
+                    <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center mb-4 text-2xl">🗂️</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Word Sorting</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm">Drag and drop adjectives into their correct categories: Appearance, Personality, or States.</p>
+                    <button id="start-sort-btn" class="w-full bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl hover:bg-sky-600 transition duration-200">Start Sorting</button>
+                </div>
+
+                 <!-- Tile 4 -->
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg transition duration-300">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4 text-2xl">✍️</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Sentence Completion</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm">Type the correct action verb to complete the sentence based on the context.</p>
+                    <button id="start-sentence-btn" class="w-full bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl hover:bg-orange-600 transition duration-200">Start Typing</button>
+                </div>
+
+                <!-- Tile 5 -->
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg transition duration-300">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mb-4 text-2xl">⚖️</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Confusing Words</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm">Choose the correct word from commonly confused pairs found in this unit.</p>
+                    <button id="start-confusing-btn" class="w-full bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl hover:bg-emerald-600 transition duration-200">Start Challenge</button>
+                </div>
+
+                 <!-- Tile 6 -->
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg transition duration-300">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4 text-2xl">🗣️</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Idioms & Phrases</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm">Fill in the missing words to complete common idioms and multi-word phrases.</p>
+                    <button id="start-mdt-btn" class="w-full bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl hover:bg-indigo-600 transition duration-200">Start Phrases</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="activity-mc" class="activity-section">
+             <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl max-w-3xl mx-auto border border-slate-100">
+                <div class="flex items-center justify-between mb-8">
+                    <button class="back-to-hub-btn text-slate-400 hover:text-slate-800 transition flex items-center font-medium">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg> Menu
+                    </button>
+                    <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm font-bold tracking-wide uppercase">Multiple Choice</span>
+                </div>
+                
+                <h2 class="text-2xl font-bold text-center text-slate-800 mb-6">Appearance & Personality</h2>
+                
+                <div id="mc-progress-bar-container" class="w-full bg-slate-100 rounded-full h-2 mb-4 overflow-hidden">
+                    <div id="mc-progress-bar" class="bg-pink-500 h-2 rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between mb-8 text-sm font-semibold text-slate-500">
+                    <span id="mc-question-counter">Q 1/10</span>
+                    <span id="mc-score" class="text-pink-600">Score: 0</span>
+                </div>
+
+                <div id="mc-quiz-container">
+                    <p id="mc-question" class="text-xl mb-8 text-center text-slate-700 font-medium leading-relaxed"></p>
+                    <div id="mc-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+
+                <div id="mc-feedback" class="mt-8 text-center font-bold text-lg h-8"></div>
+                
+                <div class="flex justify-center mt-6">
+                    <button id="mc-check-btn" class="bg-slate-800 text-white font-bold py-3 px-10 rounded-xl hover:bg-slate-700 transition shadow-md w-full md:w-auto">Check Answer</button>
+                    <button id="mc-next-btn" class="bg-pink-500 text-white font-bold py-3 px-10 rounded-xl hover:bg-pink-600 transition shadow-md hidden w-full md:w-auto">Next Question ➔</button>
+                </div>
+
+                <div id="mc-results" class="hidden text-center mt-6 py-10">
+                    <div class="text-6xl mb-4">🏆</div>
+                    <h3 class="text-3xl font-extrabold text-slate-800">Quiz Complete!</h3>
+                    <p class="text-lg mt-4 text-slate-600">You scored <span id="mc-final-score" class="font-black text-pink-600 text-2xl mx-1"></span> out of <span id="mc-total-q" class="font-bold text-slate-800"></span>.</p>
+                    <button id="mc-restart-btn" class="mt-8 bg-slate-200 text-slate-800 font-bold py-3 px-8 rounded-xl hover:bg-slate-300 transition">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="activity-gap" class="activity-section">
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl max-w-3xl mx-auto border border-slate-100">
+                <div class="flex items-center justify-between mb-8">
+                    <button class="back-to-hub-btn text-slate-400 hover:text-slate-800 transition flex items-center font-medium">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg> Menu
+                    </button>
+                    <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-bold tracking-wide uppercase">Unscramble</span>
+                </div>
+
+                 <h2 class="text-2xl font-bold text-center text-slate-800 mb-6">Relationships & Upbringing</h2>
+                 
+                 <div id="gap-progress-container" class="flex justify-center mb-8 gap-1">
+                     <!-- Progress dots will go here if needed, keeping it simple for now -->
+                 </div>
+
+                <div id="gap-container" class="py-4">
+                    <p id="gap-sentence" class="text-lg mb-8 text-center leading-relaxed text-slate-700"></p>
+                    <div class="flex justify-center">
+                        <input type="text" id="gap-input" autocomplete="off" class="border-2 border-slate-200 p-4 rounded-xl w-full max-w-xs text-center text-xl font-bold tracking-widest text-slate-800 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition">
+                    </div>
+                </div>
+
+                <div id="gap-feedback" class="mt-6 text-center font-bold text-lg h-8"></div>
+                
+                <div class="flex justify-center mt-6">
+                    <button id="gap-check-btn" class="bg-slate-800 text-white font-bold py-3 px-10 rounded-xl hover:bg-slate-700 transition shadow-md w-full md:w-auto">Check Spelling</button>
+                    <button id="gap-next-btn" class="bg-purple-500 text-white font-bold py-3 px-10 rounded-xl hover:bg-purple-600 transition shadow-md hidden w-full md:w-auto">Next Word ➔</button>
+                </div>
+
+                 <div id="gap-results" class="hidden text-center mt-6 py-10">
+                    <div class="text-6xl mb-4">🎯</div>
+                    <h3 class="text-3xl font-extrabold text-slate-800">Activity Complete!</h3>
+                    <p class="text-lg mt-4 text-slate-600">Great job unscrambling the vocabulary.</p>
+                    <button id="gap-restart-btn" class="mt-8 bg-slate-200 text-slate-800 font-bold py-3 px-8 rounded-xl hover:bg-slate-300 transition">Start Over</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="activity-sort" class="activity-section">
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl max-w-5xl mx-auto border border-slate-100">
+                <div class="flex items-center justify-between mb-6">
+                    <button class="back-to-hub-btn text-slate-400 hover:text-slate-800 transition flex items-center font-medium">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg> Menu
+                    </button>
+                    <span class="bg-sky-100 text-sky-700 px-3 py-1 rounded-full text-sm font-bold tracking-wide uppercase">Word Sorting</span>
+                </div>
+
+                <h2 class="text-2xl font-bold text-center text-slate-800 mb-2">Categorise the Adjectives</h2>
+                 <p class="text-center text-slate-500 mb-8 text-sm">Drag words from the bank into the correct category boxes.</p>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 shadow-inner">
+                    <h3 class="font-bold text-sm uppercase tracking-wider mb-4 text-center text-slate-400">Word Bank</h3>
+                    <div id="sort-words-bank">
+                        <!-- Words injected here -->
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Categories -->
+                    <div id="sort-cat-1" data-category="appearance" class="sort-drop-zone p-4 bg-blue-50 rounded-2xl border-2 border-blue-200 drop-target">
+                        <h3 class="font-bold text-sm uppercase tracking-wider mb-4 text-center text-blue-700 w-full">Appearance</h3>
+                    </div>
+                     <div id="sort-cat-2" data-category="personality_bad" class="sort-drop-zone p-4 bg-red-50 rounded-2xl border-2 border-red-200 drop-target">
+                        <h3 class="font-bold text-sm uppercase tracking-wider mb-4 text-center text-red-700 w-full">Difficult Personality</h3>
+                    </div>
+                     <div id="sort-cat-3" data-category="personality_good" class="sort-drop-zone p-4 bg-emerald-50 rounded-2xl border-2 border-emerald-200 drop-target">
+                        <h3 class="font-bold text-sm uppercase tracking-wider mb-4 text-center text-emerald-700 w-full">Positive Personality</h3>
+                    </div>
+                     <div id="sort-cat-4" data-category="states" class="sort-drop-zone p-4 bg-amber-50 rounded-2xl border-2 border-amber-200 drop-target">
+                        <h3 class="font-bold text-sm uppercase tracking-wider mb-4 text-center text-amber-700 w-full">Feelings & States</h3>
+                    </div>
+                </div>
+
+                 <div id="sort-feedback" class="mt-8 text-center font-bold text-lg h-8 text-sky-600"></div>
+
+                <div class="text-center mt-6">
+                    <button id="sort-check-btn" class="bg-slate-800 text-white font-bold py-3 px-10 rounded-xl hover:bg-slate-700 transition shadow-md">Verify Answers</button>
+                    <button id="sort-restart-btn" class="bg-sky-500 text-white font-bold py-3 px-10 rounded-xl hover:bg-sky-600 transition shadow-md hidden mx-auto">Play Again</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="activity-sentence" class="activity-section">
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl max-w-3xl mx-auto border border-slate-100">
+                 <div class="flex items-center justify-between mb-8">
+                    <button class="back-to-hub-btn text-slate-400 hover:text-slate-800 transition flex items-center font-medium">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg> Menu
+                    </button>
+                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-bold tracking-wide uppercase">Sentence Fill</span>
+                </div>
+
+                 <h2 class="text-2xl font-bold text-center text-slate-800 mb-6">Action & Influence Verbs</h2>
+                
+                <div id="sentence-container" class="py-6 bg-slate-50 rounded-2xl border border-slate-100 px-4">
+                    <p id="sentence-question" class="text-xl mb-6 text-center leading-relaxed text-slate-700 font-medium"></p>
+                    <div class="flex justify-center">
+                        <input type="text" id="sentence-input" autocomplete="off" class="border-b-4 border-slate-300 bg-transparent py-2 px-4 w-2/3 text-center text-xl font-bold text-orange-600 focus:border-orange-500 outline-none transition placeholder-slate-300" placeholder="Type word here...">
+                    </div>
+                </div>
+
+                <div id="sentence-feedback" class="mt-6 text-center font-bold text-lg h-8"></div>
+                
+                <div class="flex justify-center mt-6">
+                    <button id="sentence-check-btn" class="bg-slate-800 text-white font-bold py-3 px-10 rounded-xl hover:bg-slate-700 transition shadow-md w-full md:w-auto">Check</button>
+                    <button id="sentence-next-btn" class="bg-orange-500 text-white font-bold py-3 px-10 rounded-xl hover:bg-orange-600 transition shadow-md hidden w-full md:w-auto">Next Sentence ➔</button>
+                </div>
+
+                 <div id="sentence-results" class="hidden text-center mt-6 py-10">
+                    <div class="text-6xl mb-4">🌟</div>
+                    <h3 class="text-3xl font-extrabold text-slate-800">All Done!</h3>
+                    <p class="text-lg mt-4 text-slate-600">Excellent work completing the sentences.</p>
+                    <button id="sentence-restart-btn" class="mt-8 bg-slate-200 text-slate-800 font-bold py-3 px-8 rounded-xl hover:bg-slate-300 transition">Start Over</button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="activity-confusing" class="activity-section">
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl max-w-3xl mx-auto border border-slate-100">
+                <div class="flex items-center justify-between mb-8">
+                    <button class="back-to-hub-btn text-slate-400 hover:text-slate-800 transition flex items-center font-medium">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg> Menu
+                    </button>
+                    <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-bold tracking-wide uppercase">Confusing Words</span>
+                </div>
+
+                 <h2 class="text-2xl font-bold text-center text-slate-800 mb-6">Tricky Pairs</h2>
+                 
+                <div id="confusing-container">
+                    <p id="confusing-question" class="text-xl mb-10 text-center leading-relaxed text-slate-700 font-medium"></p>
+                    <div id="confusing-options" class="flex flex-col sm:flex-row justify-center gap-4">
+                        <!-- Option buttons injected here -->
+                    </div>
+                </div>
+
+                <div id="confusing-feedback" class="mt-8 text-center font-bold text-lg h-8"></div>
+                
+                <div class="flex justify-center mt-6">
+                    <button id="confusing-next-btn" class="bg-emerald-500 text-white font-bold py-3 px-10 rounded-xl hover:bg-emerald-600 transition shadow-md hidden w-full md:w-auto">Next Pair ➔</button>
+                </div>
+
+                 <div id="confusing-results" class="hidden text-center mt-6 py-10">
+                    <div class="text-6xl mb-4">🧠</div>
+                    <h3 class="text-3xl font-extrabold text-slate-800">Challenge Complete!</h3>
+                     <p class="text-lg mt-4 text-slate-600">Your score: <span id="confusing-final-score" class="font-black text-emerald-600 text-2xl mx-1"></span></p>
+                    <button id="confusing-restart-btn" class="mt-8 bg-slate-200 text-slate-800 font-bold py-3 px-8 rounded-xl hover:bg-slate-300 transition">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="activity-mdt" class="activity-section">
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl max-w-3xl mx-auto border border-slate-100">
+                 <div class="flex items-center justify-between mb-8">
+                    <button class="back-to-hub-btn text-slate-400 hover:text-slate-800 transition flex items-center font-medium">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg> Menu
+                    </button>
+                    <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-bold tracking-wide uppercase">Idioms & Phrases</span>
+                </div>
+
+                 <h2 class="text-2xl font-bold text-center text-slate-800 mb-6">Complete the Expression</h2>
+                 
+                <div id="mdt-container" class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 text-center">
+                    <p id="mdt-question" class="text-xl mb-4 leading-relaxed text-slate-700 font-medium"></p>
+                </div>
+
+                <div id="mdt-feedback" class="mt-6 text-center font-bold text-lg h-8"></div>
+                
+                <div class="flex justify-center mt-6">
+                    <button id="mdt-check-btn" class="bg-slate-800 text-white font-bold py-3 px-10 rounded-xl hover:bg-slate-700 transition shadow-md w-full md:w-auto">Check Phrase</button>
+                    <button id="mdt-next-btn" class="bg-indigo-500 text-white font-bold py-3 px-10 rounded-xl hover:bg-indigo-600 transition shadow-md hidden w-full md:w-auto">Next Phrase ➔</button>
+                </div>
+
+                 <div id="mdt-results" class="hidden text-center mt-6 py-10">
+                    <div class="text-6xl mb-4">💬</div>
+                    <h3 class="text-3xl font-extrabold text-slate-800">Mastered!</h3>
+                     <p class="text-lg mt-4 text-slate-600">You scored <span id="mdt-final-score" class="font-black text-indigo-600 text-2xl mx-1"></span> phrases correctly.</p>
+                    <button id="mdt-restart-btn" class="mt-8 bg-slate-200 text-slate-800 font-bold py-3 px-8 rounded-xl hover:bg-slate-300 transition">Start Over</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- STATE MANAGEMENT WITH NEW VOCABULARY ---
+            const state = {
+                currentActivity: 'hub', 
+                mc: {
+                    questions: [
+                        { q: "My brother and I have very ______ views on politics, we almost never disagree.", options: ["similar", "identical", "equal"], a: "similar" },
+                        { q: "The old man had a very distinctive, ______ nose.", options: ["turned up", "hooked", "bushy"], a: "hooked" },
+                        { q: "I hadn't seen Jack for ten years but I ______ him immediately.", options: ["recognised", "remembered", "inherited"], a: "recognised" },
+                        { q: "She believes she is better than everyone else; she's so ______.", options: ["arrogant", "bossy", "eccentric"], a: "arrogant" },
+                        { q: "Don't tell him what to do all the time, stop being so ______.", options: ["bossy", "argumentative", "sensible"], a: "bossy" },
+                        { q: "It's cold outside, so it would be ______ to take a warm coat.", options: ["sensitive", "sensible", "narrow-minded"], a: "sensible" },
+                        { q: "He cries whenever he watches a sad movie; he is very ______.", options: ["sensible", "sensitive", "open-minded"], a: "sensitive" },
+                        { q: "Her big, brown eyes are her best ______.", options: ["trait", "personality", "feature"], a: "feature" },
+                        { q: "After two weeks on the beach in Spain, she was very ______.", options: ["tanned", "bushy", "curly"], a: "tanned" },
+                        { q: "The twins are genetically ______, but have totally different personalities.", options: ["identical", "alike", "similar"], a: "identical" }
+                    ],
+                    currentIndex: 0,
+                    score: 0,
+                },
+                gap: {
+                    questions: [
+                        { q: "A brother or sister.", hint: "glisibn", a: "sibling" },
+                        { q: "A person who is part of your family.", hint: "itvearel", a: "relative" },
+                        { q: "To receive money or property after someone dies.", hint: "tirhine", a: "inherit" },
+                        { q: "To act in a particular way.", hint: "veehab", a: "behave" },
+                        { q: "The way you were treated and educated when young.", hint: "gnpirigbnu", a: "upbringing" },
+                        { q: "Parents who legally take a child into their family are ______ parents.", hint: "ivetdpoa", a: "adoptive" },
+                        { q: "Another word for a young person.", hint: "resgynuot", a: "youngster" }
+                    ],
+                    currentIndex: 0,
+                },
+                sort: {
+                    words: ['tanned', 'curly', 'hazel', 'bushy', 'hooked', 'argumentative', 'arrogant', 'bossy', 'irritable', 'stubborn', 'easy-going', 'open-minded', 'sensible', 'considerate', 'conscientious', 'exhausted', 'tense', 'curious', 'convinced'],
+                    categories: {
+                        appearance: ['tanned', 'curly', 'hazel', 'bushy', 'hooked'],
+                        personality_bad: ['argumentative', 'arrogant', 'bossy', 'irritable', 'stubborn'],
+                        personality_good: ['easy-going', 'open-minded', 'sensible', 'considerate', 'conscientious'],
+                        states: ['exhausted', 'tense', 'curious', 'convinced']
+                    }
+                },
+                sentence: {
+                    questions: [
+                        { q: "His poor exam results will ______ his future career options.", a: "determine" },
+                        { q: "How did he ______ to the bad news?", a: "react" },
+                        { q: "Some scientists ______ the old theory of global warming.", a: "challenge" },
+                        { q: "My penpal's parents ______ me very kindly when I stayed there.", a: "treated" },
+                        { q: "A person's early upbringing often ______ their future life.", a: "shapes" },
+                        { q: "Jack was very happy when he was ______ to manager.", a: "promoted" },
+                        { q: "I want to be an actor, but I ______ the confidence to perform.", a: "lack" },
+                        { q: "You can ______ a lot of experience by working abroad.", a: "gain" }
+                    ],
+                    currentIndex: 0,
+                },
+                confusing: {
+                    questions: [
+                        { q_start: "He's a very", q_end: "boy and gets upset easily by harsh words.", options: ["sensible", "sensitive"], a: "sensitive" },
+                        { q_start: "It is", q_end: "to check your answers before handing in the exam.", options: ["sensible", "sensitive"], a: "sensible" },
+                        { q_start: "Children are all", q_end: "in that they love sweet things.", options: ["alike", "similar"], a: "alike" },
+                        { q_start: "My views on the subject are", q_end: "to yours.", options: ["alike", "similar"], a: "similar" },
+                        { q_start: "The people at the party were", q_end: "Helen's friends, but Grant had invited a few too.", options: ["mainly", "entirely"], a: "mainly" },
+                        { q_start: "My cousin's bedroom floor was", q_end: "covered with clothes; there was no space to walk!", options: ["mainly", "entirely"], a: "entirely" },
+                        { q_start: "The school concert will", q_end: "in the main hall on Friday evening.", options: ["occur", "take place"], a: "take place" },
+                        { q_start: "I", q_end: "it's going to rain later. Look at those dark clouds.", options: ["reckon", "guess"], a: "reckon" }
+                    ],
+                    currentIndex: 0,
+                    score: 0
+                },
+                mdt: {
+                    questions: [
+                        { q: "We often take air travel for ___, but a hundred years ago it wasn't possible.", a: ["granted"] },
+                        { q: "Maria went to China to ___ her own ___ and loved it!", a: ["do", "thing"] },
+                        { q: "I always ___ my ___, but sometimes people just don't want to hear the truth.", a: ["speak", "mind"] },
+                        { q: "The concert will ___ ___ in the school hall on Friday.", a: ["take", "place"] },
+                        { q: "A TV reporter ___ ___ of the story that Gran had won the lottery.", a: ["got", "hold"] },
+                        { q: "The young boy's behaviour ___ out of ___ and his parents didn't know what to do.", a: ["spiralled", "control"] },
+                        { q: "The new evidence throws ___ ___ whether he really committed the crime.", a: ["doubt", "on"] },
+                        { q: "When the teacher gave them a day off, Laura ___ the ___ to go to London.", a: ["seized", "chance"] },
+                        { q: "The new flat ___ Fiona down to the ___. It's near her work and shops.", a: ["suits", "ground"] }
+                    ],
+                    currentIndex: 0,
+                    score: 0
+                }
+            };
+            
+            // --- STREAMING_CHUNK:Navigation Logic ---
+            const activitySections = {
+                hub: document.getElementById('activity-hub'),
+                mc: document.getElementById('activity-mc'),
+                gap: document.getElementById('activity-gap'),
+                sort: document.getElementById('activity-sort'),
+                sentence: document.getElementById('activity-sentence'),
+                confusing: document.getElementById('activity-confusing'),
+                mdt: document.getElementById('activity-mdt')
+            };
+
+            const startBtns = {
+                mc: document.getElementById('start-mc-btn'),
+                gap: document.getElementById('start-gap-btn'),
+                sort: document.getElementById('start-sort-btn'),
+                sentence: document.getElementById('start-sentence-btn'),
+                confusing: document.getElementById('start-confusing-btn'),
+                mdt: document.getElementById('start-mdt-btn')
+            };
+            const backToHubBtns = document.querySelectorAll('.back-to-hub-btn');
+
+            function switchActivity(activityKey) {
+                state.currentActivity = activityKey;
+                Object.keys(activitySections).forEach(key => {
+                    activitySections[key].style.display = (key === activityKey) ? 'block' : 'none';
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            Object.keys(startBtns).forEach(key => {
+                startBtns[key].addEventListener('click', () => switchActivity(key));
+            });
+            backToHubBtns.forEach(btn => {
+                btn.addEventListener('click', () => switchActivity('hub'));
+            });
+
+
+            // --- STREAMING_CHUNK:Multiple Choice Logic ---
+            const mcElements = {
+                question: document.getElementById('mc-question'),
+                options: document.getElementById('mc-options'),
+                feedback: document.getElementById('mc-feedback'),
+                checkBtn: document.getElementById('mc-check-btn'),
+                nextBtn: document.getElementById('mc-next-btn'),
+                quizContainer: document.getElementById('mc-quiz-container'),
+                results: document.getElementById('mc-results'),
+                finalScore: document.getElementById('mc-final-score'),
+                totalQ: document.getElementById('mc-total-q'),
+                restartBtn: document.getElementById('mc-restart-btn'),
+                questionCounter: document.getElementById('mc-question-counter'),
+                scoreDisplay: document.getElementById('mc-score'),
+                progressBar: document.getElementById('mc-progress-bar'),
+            };
+
+            function loadMcQuestion() {
+                const s = state.mc;
+                if (s.currentIndex >= s.questions.length) { showMcResults(); return; }
+                const current = s.questions[s.currentIndex];
+                mcElements.question.innerHTML = current.q.replace('______', '<span class="border-b-2 border-slate-400 px-4 py-1 text-pink-600 font-bold">______</span>');
+                mcElements.options.innerHTML = '';
+                mcElements.feedback.innerHTML = '';
+                
+                current.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'p-4 border-2 border-slate-200 rounded-xl text-left font-semibold text-slate-700 hover:border-pink-300 hover:bg-pink-50 transition focus:outline-none';
+                    button.onclick = () => {
+                        document.querySelectorAll('#mc-options button').forEach(btn => {
+                            btn.classList.remove('border-pink-500', 'bg-pink-100', 'text-pink-800');
+                            btn.classList.add('border-slate-200');
+                        });
+                        button.classList.remove('border-slate-200');
+                        button.classList.add('border-pink-500', 'bg-pink-100', 'text-pink-800', 'selected-option');
+                    };
+                    mcElements.options.appendChild(button);
+                });
+                
+                mcElements.questionCounter.textContent = `Q ${s.currentIndex + 1}/${s.questions.length}`;
+                mcElements.scoreDisplay.textContent = `Score: ${s.score}`;
+                // Calculate progress to fill the bar completely on the last question
+                mcElements.progressBar.style.width = `${((s.currentIndex) / s.questions.length) * 100}%`;
+                mcElements.checkBtn.classList.remove('hidden');
+                mcElements.nextBtn.classList.add('hidden');
+            }
+
+            mcElements.checkBtn.addEventListener('click', () => {
+                const s = state.mc;
+                const selectedOption = document.querySelector('#mc-options button.selected-option');
+                if (!selectedOption) {
+                    mcElements.feedback.textContent = 'Please select an answer!';
+                    mcElements.feedback.className = 'mt-8 text-center font-bold text-lg text-slate-500 animate-pulse';
+                    return;
+                }
+                const answer = selectedOption.textContent;
+                const correctAnswer = s.questions[s.currentIndex].a;
+                
+                if (answer === correctAnswer) {
+                    s.score++;
+                    mcElements.feedback.textContent = 'Correct!';
+                    mcElements.feedback.className = 'mt-8 text-center font-bold text-lg text-emerald-500';
+                    selectedOption.classList.remove('bg-pink-100', 'border-pink-500', 'text-pink-800');
+                    selectedOption.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-800');
+                } else {
+                    mcElements.feedback.textContent = `Incorrect. The correct answer is "${correctAnswer}".`;
+                    mcElements.feedback.className = 'mt-8 text-center font-bold text-lg text-red-500';
+                    selectedOption.classList.remove('bg-pink-100', 'border-pink-500', 'text-pink-800');
+                    selectedOption.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                    // Highlight correct answer
+                    document.querySelectorAll('#mc-options button').forEach(btn => {
+                        if(btn.textContent === correctAnswer) {
+                            btn.classList.add('border-emerald-500', 'text-emerald-700', 'bg-emerald-50');
+                        }
+                    });
+                }
+                mcElements.scoreDisplay.textContent = `Score: ${s.score}`;
+                mcElements.checkBtn.classList.add('hidden');
+                mcElements.nextBtn.classList.remove('hidden');
+                document.querySelectorAll('#mc-options button').forEach(b => b.disabled = true);
+                
+                if(s.currentIndex === s.questions.length - 1) {
+                     mcElements.progressBar.style.width = `100%`;
+                     mcElements.nextBtn.textContent = "See Results ➔";
+                }
+            });
+
+            mcElements.nextBtn.addEventListener('click', () => {
+                state.mc.currentIndex++;
+                loadMcQuestion();
+            });
+
+            mcElements.restartBtn.addEventListener('click', () => {
+                state.mc.currentIndex = 0; 
+                state.mc.score = 0;
+                mcElements.results.classList.add('hidden');
+                mcElements.quizContainer.classList.remove('hidden');
+                mcElements.questionCounter.parentElement.classList.remove('hidden');
+                mcElements.progressBar.parentElement.classList.remove('hidden');
+                mcElements.nextBtn.textContent = "Next Question ➔";
+                loadMcQuestion();
+            });
+
+            function showMcResults() {
+                mcElements.quizContainer.classList.add('hidden');
+                mcElements.checkBtn.classList.add('hidden');
+                mcElements.nextBtn.classList.add('hidden');
+                mcElements.feedback.innerHTML = '';
+                mcElements.results.classList.remove('hidden');
+                mcElements.questionCounter.parentElement.classList.add('hidden');
+                mcElements.progressBar.parentElement.classList.add('hidden');
+                mcElements.finalScore.textContent = state.mc.score;
+                mcElements.totalQ.textContent = state.mc.questions.length;
+            }
+
+            // --- STREAMING_CHUNK:Unscramble Logic ---
+            const gapElements = {
+                sentence: document.getElementById('gap-sentence'),
+                input: document.getElementById('gap-input'),
+                feedback: document.getElementById('gap-feedback'),
+                checkBtn: document.getElementById('gap-check-btn'),
+                nextBtn: document.getElementById('gap-next-btn'),
+                container: document.getElementById('gap-container'),
+                results: document.getElementById('gap-results'),
+                restartBtn: document.getElementById('gap-restart-btn'),
+            };
+
+            function loadGapQuestion() {
+                const s = state.gap;
+                if(s.currentIndex >= s.questions.length) {
+                    gapElements.container.classList.add('hidden');
+                    gapElements.results.classList.remove('hidden');
+                    gapElements.checkBtn.classList.add('hidden');
+                    gapElements.nextBtn.classList.add('hidden');
+                    gapElements.feedback.textContent = '';
+                    return;
+                }
+                const current = s.questions[s.currentIndex];
+                gapElements.sentence.innerHTML = `<span class="font-semibold text-slate-800">${current.q}</span> <br><br> <span class="text-sm text-slate-400 uppercase tracking-widest font-bold">Anagram:</span> <br> <strong class="text-3xl tracking-[0.3em] text-purple-600 mt-2 inline-block">${current.hint.toUpperCase()}</strong>`;
+                gapElements.input.value = '';
+                gapElements.feedback.textContent = '';
+                gapElements.input.disabled = false;
+                gapElements.input.classList.remove('border-emerald-500', 'text-emerald-600', 'border-red-500', 'text-red-600', 'bg-emerald-50', 'bg-red-50');
+                gapElements.checkBtn.classList.remove('hidden');
+                gapElements.nextBtn.classList.add('hidden');
+                setTimeout(() => gapElements.input.focus(), 100);
+            }
+
+            gapElements.checkBtn.addEventListener('click', () => {
+                const s = state.gap;
+                const userAnswer = gapElements.input.value.trim().toLowerCase();
+                const correctAnswer = s.questions[s.currentIndex].a.toLowerCase();
+                
+                if(userAnswer === ''){
+                    gapElements.feedback.textContent = 'Please type a word.';
+                    gapElements.feedback.className = 'mt-6 text-center font-bold text-lg text-slate-500';
+                    return;
+                }
+                if (userAnswer === correctAnswer) {
+                    gapElements.feedback.textContent = 'Perfect!';
+                    gapElements.feedback.className = 'mt-6 text-center font-bold text-lg text-emerald-500';
+                    gapElements.input.classList.add('border-emerald-500', 'text-emerald-700', 'bg-emerald-50');
+                } else {
+                    gapElements.feedback.textContent = `Not quite. The correct word is "${s.questions[s.currentIndex].a}".`;
+                    gapElements.feedback.className = 'mt-6 text-center font-bold text-lg text-red-500';
+                    gapElements.input.classList.add('border-red-500', 'text-red-700', 'bg-red-50');
+                    gapElements.input.value = s.questions[s.currentIndex].a; // Show correct answer
+                }
+                gapElements.input.disabled = true;
+                gapElements.checkBtn.classList.add('hidden');
+                gapElements.nextBtn.classList.remove('hidden');
+            });
+            
+            // Allow Enter key to check/next
+            gapElements.input.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    if(!gapElements.checkBtn.classList.contains('hidden')) {
+                        gapElements.checkBtn.click();
+                    } else {
+                        gapElements.nextBtn.click();
+                    }
+                }
+            });
+
+            gapElements.nextBtn.addEventListener('click', () => {
+                state.gap.currentIndex++;
+                loadGapQuestion();
+            });
+            
+            gapElements.restartBtn.addEventListener('click', () => {
+                state.gap.currentIndex = 0;
+                gapElements.container.classList.remove('hidden');
+                gapElements.results.classList.add('hidden');
+                loadGapQuestion();
+            });
+
+
+            // --- STREAMING_CHUNK:Sorting Game Logic ---
+            const sortElements = {
+                wordsBank: document.getElementById('sort-words-bank'),
+                dropZones: document.querySelectorAll('.sort-drop-zone'),
+                checkBtn: document.getElementById('sort-check-btn'),
+                restartBtn: document.getElementById('sort-restart-btn'),
+                feedback: document.getElementById('sort-feedback'),
+            };
+
+            let draggedSortItem = null;
+
+            function initSortGame() {
+                sortElements.feedback.textContent = '';
+                sortElements.checkBtn.classList.remove('hidden');
+                sortElements.restartBtn.classList.add('hidden');
+
+                // Clear drop zones, keeping headers
+                sortElements.dropZones.forEach(zone => {
+                    const header = zone.querySelector('h3');
+                    zone.innerHTML = '';
+                    zone.appendChild(header);
+                });
+
+                // Shuffle words
+                const shuffledWords = [...state.sort.words].sort(() => Math.random() - 0.5);
+
+                // Populate word bank
+                sortElements.wordsBank.innerHTML = '';
+                shuffledWords.forEach(word => {
+                    const wordEl = document.createElement('div');
+                    wordEl.textContent = word;
+                    wordEl.dataset.word = word;
+                    wordEl.draggable = true;
+                    wordEl.className = 'sort-word draggable';
+                    sortElements.wordsBank.appendChild(wordEl);
+                });
+                
+                addSortDragListeners();
+            }
+
+            function addSortDragListeners() {
+                // Event delegation for draggables to handle them moving between containers
+                document.addEventListener('dragstart', (e) => {
+                    if(e.target.classList.contains('draggable')) {
+                        draggedSortItem = e.target;
+                        e.target.style.opacity = '0.5';
+                    }
+                });
+                
+                document.addEventListener('dragend', (e) => {
+                    if(e.target.classList.contains('draggable')) {
+                        e.target.style.opacity = '1';
+                        draggedSortItem = null;
+                        sortElements.dropZones.forEach(z => z.classList.remove('drag-over'));
+                    }
+                });
+
+                sortElements.dropZones.forEach(zone => {
+                    zone.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        if(draggedSortItem) zone.classList.add('drag-over');
+                    });
+                    zone.addEventListener('dragleave', e => {
+                        zone.classList.remove('drag-over');
+                    });
+                    zone.addEventListener('drop', e => {
+                        e.preventDefault();
+                        zone.classList.remove('drag-over');
+                        if (draggedSortItem) {
+                            zone.appendChild(draggedSortItem);
+                        }
+                    });
+                });
+                
+                // Allow dropping back to bank
+                const bank = sortElements.wordsBank.parentElement;
+                bank.addEventListener('dragover', e => {
+                    e.preventDefault();
+                });
+                bank.addEventListener('drop', e => {
+                     e.preventDefault();
+                     if (draggedSortItem) {
+                         sortElements.wordsBank.appendChild(draggedSortItem);
+                     }
+                });
+            }
+
+            sortElements.checkBtn.addEventListener('click', () => {
+                let totalWordsPlaced = 0;
+                let correctPlacements = 0;
+                const totalWordsToPlace = state.sort.words.length;
+
+                sortElements.dropZones.forEach(zone => {
+                    const category = zone.dataset.category;
+                    const correctWordsForCat = state.sort.categories[category];
+                    
+                    zone.querySelectorAll('.sort-word').forEach(wordEl => {
+                        totalWordsPlaced++;
+                        const word = wordEl.dataset.word;
+                        
+                        // Remove old icons if they exist
+                        const oldIcons = wordEl.querySelectorAll('.feedback-icon');
+                        oldIcons.forEach(i => i.remove());
+                        
+                        wordEl.draggable = false; // Disable dragging after check
+                        wordEl.classList.remove('draggable');
+
+                        const iconHTML = `<span class="feedback-icon correct-icon">✔</span><span class="feedback-icon incorrect-icon">✖</span>`;
+                        wordEl.insertAdjacentHTML('beforeend', iconHTML);
+
+                        if (correctWordsForCat.includes(word)) {
+                            wordEl.classList.add('correct', 'border-emerald-500', 'bg-emerald-50');
+                            correctPlacements++;
+                        } else {
+                            wordEl.classList.add('incorrect', 'border-red-500', 'bg-red-50');
+                        }
+                    });
+                });
+
+                if (totalWordsPlaced === 0) {
+                     sortElements.feedback.textContent = "You haven't placed any words!";
+                     sortElements.feedback.className = 'mt-8 text-center font-bold text-lg h-8 text-slate-500';
+                     // Re-enable dragging
+                     document.querySelectorAll('.sort-word').forEach(w => {
+                         w.draggable = true;
+                         w.classList.add('draggable');
+                     });
+                     return;
+                }
+
+                sortElements.feedback.textContent = `You placed ${correctPlacements} out of ${totalWordsPlaced} words correctly (${totalWordsToPlace} total).`;
+                sortElements.feedback.className = 'mt-8 text-center font-bold text-lg h-8 text-sky-600';
+                sortElements.checkBtn.classList.add('hidden');
+                sortElements.restartBtn.classList.remove('hidden');
+                // Hide bank if checking
+                sortElements.wordsBank.parentElement.style.opacity = '0.5';
+            });
+
+            sortElements.restartBtn.addEventListener('click', () => {
+                 sortElements.wordsBank.parentElement.style.opacity = '1';
+                 initSortGame();
+            });
+
+            // --- STREAMING_CHUNK:Sentence Completion Logic ---
+            const sentenceElements = {
+                question: document.getElementById('sentence-question'),
+                input: document.getElementById('sentence-input'),
+                feedback: document.getElementById('sentence-feedback'),
+                checkBtn: document.getElementById('sentence-check-btn'),
+                nextBtn: document.getElementById('sentence-next-btn'),
+                container: document.getElementById('sentence-container'),
+                results: document.getElementById('sentence-results'),
+                restartBtn: document.getElementById('sentence-restart-btn'),
+            };
+
+            function loadSentenceQuestion() {
+                const s = state.sentence;
+                if (s.currentIndex >= s.questions.length) {
+                    sentenceElements.container.classList.add('hidden');
+                    sentenceElements.results.classList.remove('hidden');
+                    sentenceElements.checkBtn.classList.add('hidden');
+                    sentenceElements.nextBtn.classList.add('hidden');
+                    sentenceElements.feedback.textContent = '';
+                    return;
+                }
+                const current = s.questions[s.currentIndex];
+                sentenceElements.question.innerHTML = current.q.replace('______', '<span class="text-orange-400 font-bold">[ type here ]</span>');
+                sentenceElements.input.value = '';
+                sentenceElements.feedback.textContent = '';
+                sentenceElements.input.disabled = false;
+                sentenceElements.input.classList.remove('text-emerald-600', 'border-emerald-500', 'text-red-600', 'border-red-500');
+                sentenceElements.checkBtn.classList.remove('hidden');
+                sentenceElements.nextBtn.classList.add('hidden');
+                setTimeout(() => sentenceElements.input.focus(), 100);
+            }
+            
+            sentenceElements.checkBtn.addEventListener('click', () => {
+                const s = state.sentence;
+                const userAnswer = sentenceElements.input.value.trim().toLowerCase();
+                const correctAnswer = s.questions[s.currentIndex].a.toLowerCase();
+                
+                if (userAnswer === '') {
+                    sentenceElements.feedback.textContent = 'Please type a verb.';
+                    sentenceElements.feedback.className = 'mt-6 text-center font-bold text-lg text-slate-500';
+                    return;
+                }
+                if (userAnswer === correctAnswer) {
+                    sentenceElements.feedback.textContent = 'Correct!';
+                    sentenceElements.feedback.className = 'mt-6 text-center font-bold text-lg text-emerald-500';
+                    sentenceElements.input.classList.add('text-emerald-600', 'border-emerald-500');
+                } else {
+                    sentenceElements.feedback.textContent = `Not quite. The correct answer is "${correctAnswer}".`;
+                    sentenceElements.feedback.className = 'mt-6 text-center font-bold text-lg text-red-500';
+                    sentenceElements.input.classList.add('text-red-600', 'border-red-500');
+                }
+                
+                // Show the complete sentence above
+                sentenceElements.question.innerHTML = s.questions[s.currentIndex].q.replace('______', `<span class="text-${userAnswer===correctAnswer?'emerald':'red'}-500 font-bold underline decoration-2 underline-offset-4">${correctAnswer}</span>`);
+                
+                sentenceElements.input.disabled = true;
+                sentenceElements.checkBtn.classList.add('hidden');
+                sentenceElements.nextBtn.classList.remove('hidden');
+            });
+            
+             sentenceElements.input.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    if(!sentenceElements.checkBtn.classList.contains('hidden')) sentenceElements.checkBtn.click();
+                    else sentenceElements.nextBtn.click();
+                }
+            });
+
+            sentenceElements.nextBtn.addEventListener('click', () => {
+                state.sentence.currentIndex++;
+                loadSentenceQuestion();
+            });
+            
+            sentenceElements.restartBtn.addEventListener('click', () => {
+                state.sentence.currentIndex = 0;
+                sentenceElements.container.classList.remove('hidden');
+                sentenceElements.results.classList.add('hidden');
+                loadSentenceQuestion();
+            });
+
+            // --- STREAMING_CHUNK:Confusing Words Logic ---
+            const confusingElements = {
+                question: document.getElementById('confusing-question'),
+                options: document.getElementById('confusing-options'),
+                feedback: document.getElementById('confusing-feedback'),
+                nextBtn: document.getElementById('confusing-next-btn'),
+                container: document.getElementById('confusing-container'),
+                results: document.getElementById('confusing-results'),
+                finalScore: document.getElementById('confusing-final-score'),
+                restartBtn: document.getElementById('confusing-restart-btn'),
+            };
+
+            function loadConfusingQuestion() {
+                const s = state.confusing;
+                if (s.currentIndex >= s.questions.length) {
+                    showConfusingResults();
+                    return;
+                }
+                const current = s.questions[s.currentIndex];
+                confusingElements.question.innerHTML = `${current.q_start} <span class="border-b-2 border-dashed border-emerald-400 w-24 inline-block mx-2 text-center text-emerald-100 select-none">_</span> ${current.q_end}`;
+                confusingElements.options.innerHTML = '';
+                confusingElements.feedback.textContent = '';
+                confusingElements.nextBtn.classList.add('hidden');
+
+                current.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'py-3 px-8 border-2 border-slate-200 rounded-xl hover:border-emerald-300 hover:bg-emerald-50 transition font-bold text-slate-700 min-w-[140px]';
+                    button.onclick = (e) => checkConfusingAnswer(e.target);
+                    confusingElements.options.appendChild(button);
+                });
+            }
+
+            function checkConfusingAnswer(selectedButton) {
+                const s = state.confusing;
+                const userAnswer = selectedButton.textContent;
+                const correctAnswer = s.questions[s.currentIndex].a;
+
+                document.querySelectorAll('#confusing-options button').forEach(b => {
+                    b.disabled = true;
+                    b.classList.add('opacity-50', 'cursor-not-allowed');
+                });
+                selectedButton.classList.remove('opacity-50');
+
+                if (userAnswer === correctAnswer) {
+                    s.score++;
+                    selectedButton.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-800');
+                    confusingElements.feedback.textContent = 'Correct!';
+                    confusingElements.feedback.className = 'mt-8 text-center font-bold text-lg text-emerald-500';
+                } else {
+                    selectedButton.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                    confusingElements.feedback.textContent = `Not quite.`;
+                    confusingElements.feedback.className = 'mt-8 text-center font-bold text-lg text-red-500';
+                    // highlight correct
+                    document.querySelectorAll('#confusing-options button').forEach(b => {
+                        if(b.textContent === correctAnswer) {
+                             b.classList.remove('opacity-50');
+                             b.classList.add('border-emerald-500', 'text-emerald-700');
+                        }
+                    });
+                }
+                
+                // Fill the gap
+                const current = s.questions[s.currentIndex];
+                confusingElements.question.innerHTML = `${current.q_start} <span class="font-bold text-${userAnswer===correctAnswer?'emerald':'red'}-600 underline decoration-2 underline-offset-4 mx-1">${correctAnswer}</span> ${current.q_end}`;
+
+                confusingElements.nextBtn.classList.remove('hidden');
+            }
+
+            function showConfusingResults() {
+                const s = state.confusing;
+                confusingElements.container.classList.add('hidden');
+                confusingElements.feedback.classList.add('hidden');
+                confusingElements.nextBtn.classList.add('hidden');
+                confusingElements.results.classList.remove('hidden');
+                confusingElements.finalScore.textContent = `${s.score}/${s.questions.length}`;
+            }
+
+            confusingElements.nextBtn.addEventListener('click', () => {
+                state.confusing.currentIndex++;
+                loadConfusingQuestion();
+            });
+
+            confusingElements.restartBtn.addEventListener('click', () => {
+                const s = state.confusing;
+                s.currentIndex = 0;
+                s.score = 0;
+                confusingElements.results.classList.add('hidden');
+                confusingElements.container.classList.remove('hidden');
+                confusingElements.feedback.classList.remove('hidden');
+                loadConfusingQuestion();
+            });
+            
+            // --- STREAMING_CHUNK:Idioms & Phrases Logic ---
+            const mdtElements = {
+                question: document.getElementById('mdt-question'),
+                feedback: document.getElementById('mdt-feedback'),
+                checkBtn: document.getElementById('mdt-check-btn'),
+                nextBtn: document.getElementById('mdt-next-btn'),
+                container: document.getElementById('mdt-container'),
+                results: document.getElementById('mdt-results'),
+                finalScore: document.getElementById('mdt-final-score'),
+                restartBtn: document.getElementById('mdt-restart-btn'),
+            };
+
+            function loadMdtQuestion() {
+                const s = state.mdt;
+                if (s.currentIndex >= s.questions.length) {
+                    showMdtResults();
+                    return;
+                }
+                const current = s.questions[s.currentIndex];
+                let questionHtml = current.q;
+                
+                // Replace ___ with nice inputs
+                questionHtml = questionHtml.replace(/___/g, () => {
+                    return `<input type="text" autocomplete="off" class="mdt-input border-b-2 border-indigo-300 bg-transparent focus:border-indigo-600 outline-none text-center w-20 mx-1 font-bold text-indigo-700 transition">`;
+                });
+
+                mdtElements.question.innerHTML = questionHtml;
+                mdtElements.feedback.textContent = '';
+                mdtElements.checkBtn.classList.remove('hidden');
+                mdtElements.nextBtn.classList.add('hidden');
+                
+                // Focus first input
+                const firstInput = mdtElements.question.querySelector('.mdt-input');
+                if(firstInput) setTimeout(()=> firstInput.focus(), 100);
+                
+                // Add enter key support for inputs
+                mdtElements.question.querySelectorAll('.mdt-input').forEach((input, index, list) => {
+                    input.addEventListener('keypress', (e) => {
+                        if(e.key === 'Enter') {
+                            if(index < list.length - 1) list[index+1].focus();
+                            else if(!mdtElements.checkBtn.classList.contains('hidden')) mdtElements.checkBtn.click();
+                        }
+                    });
+                });
+            }
+
+            function showMdtResults() {
+                const s = state.mdt;
+                mdtElements.container.classList.add('hidden');
+                mdtElements.feedback.classList.add('hidden');
+                mdtElements.checkBtn.classList.add('hidden');
+                mdtElements.nextBtn.classList.add('hidden');
+                mdtElements.results.classList.remove('hidden');
+                mdtElements.finalScore.textContent = `${s.score}/${s.questions.length}`;
+            }
+
+            mdtElements.checkBtn.addEventListener('click', () => {
+                const s = state.mdt;
+                const currentAnswers = s.questions[s.currentIndex].a;
+                const userInputs = mdtElements.question.querySelectorAll('.mdt-input');
+                let allCorrect = true;
+                let emptyFields = false;
+
+                userInputs.forEach((input, index) => {
+                    const userAnswer = input.value.trim().toLowerCase();
+                    if(userAnswer === '') emptyFields = true;
+                });
+                
+                if(emptyFields) {
+                     mdtElements.feedback.textContent = 'Please fill in all the blanks.';
+                     mdtElements.feedback.className = 'mt-6 text-center font-bold text-lg text-slate-500';
+                     return;
+                }
+
+                userInputs.forEach((input, index) => {
+                    const userAnswer = input.value.trim().toLowerCase();
+                    const correctAnswer = currentAnswers[index].toLowerCase();
+                    input.disabled = true;
+                    if (userAnswer === correctAnswer) {
+                        input.classList.add('border-emerald-500', 'text-emerald-600');
+                        input.classList.remove('border-indigo-300');
+                    } else {
+                        input.classList.add('border-red-500', 'text-red-600', 'line-through');
+                        input.classList.remove('border-indigo-300');
+                        allCorrect = false;
+                    }
+                });
+
+                if (allCorrect) {
+                    s.score++;
+                    mdtElements.feedback.textContent = 'Correct!';
+                    mdtElements.feedback.className = 'mt-6 text-center font-bold text-lg text-emerald-500';
+                } else {
+                    mdtElements.feedback.innerHTML = `Not quite. The correct phrase is: <br> <span class="text-indigo-600 font-black tracking-wide mt-2 inline-block">${currentAnswers.join(' ').toUpperCase()}</span>`;
+                    mdtElements.feedback.className = 'mt-6 text-center font-bold text-lg text-red-500';
+                }
+
+                mdtElements.checkBtn.classList.add('hidden');
+                mdtElements.nextBtn.classList.remove('hidden');
+            });
+            
+            mdtElements.nextBtn.addEventListener('click', () => {
+                state.mdt.currentIndex++;
+                loadMdtQuestion();
+            });
+
+            mdtElements.restartBtn.addEventListener('click', () => {
+                const s = state.mdt;
+                s.currentIndex = 0;
+                s.score = 0;
+                mdtElements.results.classList.add('hidden');
+                mdtElements.container.classList.remove('hidden');
+                mdtElements.feedback.classList.remove('hidden');
+                mdtElements.checkBtn.classList.remove('hidden');
+                loadMdtQuestion();
+            });
+
+
+            // --- STREAMING_CHUNK:Final Bootstrapping ---
+            function initialize() {
+                loadMcQuestion();
+                loadGapQuestion();
+                initSortGame();
+                loadSentenceQuestion();
+                loadConfusingQuestion();
+                loadMdtQuestion();
+                // Default to hub
+                switchActivity('hub'); 
+            }
+
+            // Start the app
+            initialize();
+        });
+    </script>
+</body>
+</html>
