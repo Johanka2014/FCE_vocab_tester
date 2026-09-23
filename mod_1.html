@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FCE Vocabulary: Module 1</title>
+    <title>FCE Vocabulary Tester</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f2f9f1; /* Lightest green from reference */
+            background-color: #f0fdf4; /* Light green background */
+        }
+        h1, h2, h3, h4, h5, h6 {
+             font-family: 'Montserrat', sans-serif;
         }
         /* Custom styles for drag & drop activities */
         .draggable {
@@ -24,7 +27,7 @@
             transition: background-color 0.3s ease;
         }
         .drag-over {
-            background-color: #d8eed3; /* Soft green for drag over */
+            background-color: #dcfce7; /* Green drag over state */
         }
         .activity-section {
             display: none;
@@ -45,9 +48,9 @@
         .sort-word {
             padding: 5px 10px;
             background-color: #ffffff;
-            border: 1px solid #7cb342; /* Light green border */
+            border: 1px solid #86efac;
             border-radius: 8px;
-            color: #33691e; /* Deep green text */
+            color: #166534;
             font-weight: 600;
         }
         .sort-drop-zone .sort-word {
@@ -94,250 +97,255 @@
         }
     </style>
 </head>
-<body class="text-gray-800" style="background-color: #f2f9f1;">
+<body class="bg-[#f0fdf4] text-gray-800">
 
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-20 border-b-4 border-[#558b2f]">
+    <header class="bg-white shadow-md sticky top-0 z-20 border-b-4 border-[#22c55e]">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-black text-[#558b2f] tracking-wider uppercase italic">FCE Vocab Tester - Module 1</h1>
-            <span class="text-sm font-medium text-[#558b2f] bg-[#e1f0db] px-3 py-1 rounded-full">Practice App</span>
+            <h1 class="text-3xl font-black text-[#15803d] tracking-wider uppercase">FCE Vocab Tester</h1>
+            <span class="text-sm font-bold text-white bg-[#16a34a] px-3 py-1 rounded-full">Practice App</span>
         </div>
     </header>
 
-    <main class="container mx-auto p-6">
+    <main class="container mx-auto p-6 relative">
+         <!-- Abstract decorative blobs based on reference image -->
+         <div class="absolute top-0 left-0 w-64 h-64 bg-[#bbf7d0] rounded-full mix-blend-multiply filter blur-3xl opacity-50 z-0 pointer-events-none transform -translate-x-1/2 -translate-y-1/2"></div>
+         <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#86efac] rounded-full mix-blend-multiply filter blur-3xl opacity-40 z-0 pointer-events-none transform translate-x-1/3 translate-y-1/3"></div>
+
         <!-- Main Menu Hub Section -->
-        <section id="activity-hub" class="activity-section">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold text-[#33691e]">Welcome!</h2>
-                <p class="text-lg text-[#558b2f] mt-2 font-medium">Choose an activity below to start practicing.</p>
+        <section id="activity-hub" class="activity-section relative z-10">
+            <div class="text-left mb-12 max-w-2xl">
+                <p class="text-[#16a34a] font-bold tracking-wide uppercase mb-2">A Great Place To Learn</p>
+                <h2 class="text-5xl font-black text-gray-900 leading-tight">Master English & Give Back To <span class="text-[#22c55e]">Nature.</span></h2>
+                <p class="text-lg text-gray-600 mt-4 leading-relaxed">Choose an activity below to start practicing your FCE vocabulary. Enhance your skills while embracing a green mindset.</p>
             </div>
-            <div class="flex flex-wrap justify-center gap-8">
+            <div class="flex flex-wrap justify-start gap-6">
                 <!-- Tile 1: Multiple Choice -->
-                <div class="hub-tile bg-[#8bc34a] p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-2 border-white">
-                    <h3 class="text-2xl font-black text-white mb-4 italic tracking-wide">Multiple Choice Challenge</h3>
-                    <p class="text-white mb-6 flex-grow font-medium">Test your knowledge by choosing the word that best completes each sentence. A classic way to build your vocabulary.</p>
-                    <button id="start-mc-btn" class="bg-white text-[#558b2f] font-extrabold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md w-full mt-auto uppercase tracking-wider">Start Activity</button>
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-xl w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-t-8 border-[#16a34a]">
+                    <h3 class="text-2xl font-black text-gray-800 mb-3">Multiple Choice Challenge</h3>
+                    <p class="text-gray-600 mb-6 flex-grow text-sm">Test your knowledge by choosing the word that best completes each sentence.</p>
+                    <button id="start-mc-btn" class="bg-[#16a34a] text-white font-bold py-3 px-6 rounded-full hover:bg-[#15803d] transition shadow-md w-full mt-auto uppercase tracking-wide text-sm">Start Learning ➔</button>
                 </div>
                 <!-- Tile 2: Unscramble -->
-                <div class="hub-tile bg-[#7cb342] p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-2 border-white">
-                    <h3 class="text-2xl font-black text-white mb-4 italic tracking-wide">Unscramble the Words</h3>
-                    <p class="text-white mb-6 flex-grow font-medium">Put your brain to the test! Rearrange the jumbled letters to form the correct word or phrase related to likes and dislikes.</p>
-                    <button id="start-gap-btn" class="bg-white text-[#558b2f] font-extrabold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md w-full mt-auto uppercase tracking-wider">Start Activity</button>
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-xl w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-t-8 border-[#22c55e]">
+                    <h3 class="text-2xl font-black text-gray-800 mb-3">Unscramble the Words</h3>
+                    <p class="text-gray-600 mb-6 flex-grow text-sm">Rearrange the jumbled letters to form the correct word related to likes and dislikes.</p>
+                    <button id="start-gap-btn" class="bg-[#22c55e] text-white font-bold py-3 px-6 rounded-full hover:bg-[#16a34a] transition shadow-md w-full mt-auto uppercase tracking-wide text-sm">Start Learning ➔</button>
                 </div>
                 <!-- Tile 3: Sorting -->
-                <div class="hub-tile bg-[#689f38] p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-2 border-white">
-                    <h3 class="text-2xl font-black text-white mb-4 italic tracking-wide">Action Word Sorting</h3>
-                    <p class="text-white mb-6 flex-grow font-medium">Drag and drop action words into the correct categories based on which part of the body performs them. A fun, interactive challenge!</p>
-                    <button id="start-sort-btn" class="bg-white text-[#558b2f] font-extrabold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md w-full mt-auto uppercase tracking-wider">Start Activity</button>
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-xl w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-t-8 border-[#4ade80]">
+                    <h3 class="text-2xl font-black text-gray-800 mb-3">Action Word Sorting</h3>
+                    <p class="text-gray-600 mb-6 flex-grow text-sm">Drag and drop action words into the correct categories based on body parts.</p>
+                    <button id="start-sort-btn" class="bg-[#4ade80] text-gray-900 font-bold py-3 px-6 rounded-full hover:bg-[#22c55e] hover:text-white transition shadow-md w-full mt-auto uppercase tracking-wide text-sm">Start Learning ➔</button>
                 </div>
                  <!-- Tile 4: Sentence Completion -->
-                <div class="hub-tile bg-[#9ccc65] p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-2 border-white">
-                    <h3 class="text-2xl font-black text-white mb-4 italic tracking-wide">Sentence Completion</h3>
-                    <p class="text-white mb-6 flex-grow font-medium">Complete the sentences with the correct form of an action word. This will test your grammar and vocabulary in context.</p>
-                    <button id="start-sentence-btn" class="bg-white text-[#558b2f] font-extrabold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md w-full mt-auto uppercase tracking-wider">Start Activity</button>
+                <div class="hub-tile bg-white p-6 rounded-2xl shadow-xl w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-t-8 border-[#15803d]">
+                    <h3 class="text-2xl font-black text-gray-800 mb-3">Sentence Completion</h3>
+                    <p class="text-gray-600 mb-6 flex-grow text-sm">Complete the sentences with the correct form of an action word.</p>
+                    <button id="start-sentence-btn" class="bg-[#15803d] text-white font-bold py-3 px-6 rounded-full hover:bg-[#166534] transition shadow-md w-full mt-auto uppercase tracking-wide text-sm">Start Learning ➔</button>
                 </div>
                 <!-- Tile 5: Confusing Words -->
-                <div class="hub-tile bg-[#8bc34a] p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-2 border-white">
-                    <h3 class="text-2xl font-black text-white mb-4 italic tracking-wide">Confusing Words</h3>
-                    <p class="text-white mb-6 flex-grow font-medium">Choose the correct word from the pair of commonly confused words to complete the sentence.</p>
-                    <button id="start-confusing-btn" class="bg-white text-[#558b2f] font-extrabold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md w-full mt-auto uppercase tracking-wider">Start Activity</button>
+                <div class="hub-tile bg-[#16a34a] p-6 rounded-2xl shadow-xl w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-t-8 border-white">
+                    <h3 class="text-2xl font-black text-white mb-3">Confusing Words</h3>
+                    <p class="text-[#dcfce7] mb-6 flex-grow text-sm">Choose the correct word from the pair of commonly confused words to complete the sentence.</p>
+                    <button id="start-confusing-btn" class="bg-white text-[#15803d] font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition shadow-md w-full mt-auto uppercase tracking-wide text-sm">Start Learning ➔</button>
                 </div>
                  <!-- Tile 6: Make, Do & Take -->
-                <div class="hub-tile bg-[#7cb342] p-8 rounded-xl shadow-lg w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-2 border-white">
-                    <h3 class="text-2xl font-black text-white mb-4 italic tracking-wide">Make, Do & Take</h3>
-                    <p class="text-white mb-6 flex-grow font-medium">Complete the sentences with the correct form of 'make', 'do', or 'take'. A common challenge for FCE students!</p>
-                    <button id="start-mdt-btn" class="bg-white text-[#558b2f] font-extrabold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md w-full mt-auto uppercase tracking-wider">Start Activity</button>
+                <div class="hub-tile bg-[#15803d] p-6 rounded-2xl shadow-xl w-full md:w-2/5 lg:w-[30%] text-center transition transform hover:-translate-y-2 border-t-8 border-[#4ade80]">
+                    <h3 class="text-2xl font-black text-white mb-3">Make, Do & Take</h3>
+                    <p class="text-[#bbf7d0] mb-6 flex-grow text-sm">Complete the sentences with the correct form of 'make', 'do', or 'take'.</p>
+                    <button id="start-mdt-btn" class="bg-[#4ade80] text-gray-900 font-bold py-3 px-6 rounded-full hover:bg-[#22c55e] hover:text-white transition shadow-md w-full mt-auto uppercase tracking-wide text-sm">Start Learning ➔</button>
                 </div>
             </div>
         </section>
 
         <!-- Multiple Choice Section -->
-        <section id="activity-mc" class="activity-section">
-             <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto border-4 border-[#e1f0db]">
-                <h2 class="text-3xl font-black text-center mb-2 text-[#558b2f] italic">Multiple Choice Challenge</h2>
-                <h3 class="text-xl font-bold text-center text-[#7cb342] mb-4 uppercase tracking-wider">Comparison & Contrast</h3>
-                <p class="text-center text-gray-500 mb-6 font-medium">Choose the word that best completes the sentence.</p>
-                <div id="mc-progress-bar-container" class="w-full bg-[#f2f9f1] rounded-full h-3 mb-4 border border-[#e1f0db]">
-                    <div id="mc-progress-bar" class="bg-[#558b2f] h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+        <section id="activity-mc" class="activity-section relative z-10">
+             <div class="bg-white p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto border border-gray-100">
+                <h2 class="text-4xl font-black text-center mb-2 text-gray-900">Multiple Choice Challenge</h2>
+                <h3 class="text-xl font-bold text-center text-[#16a34a] mb-6 uppercase tracking-widest">Comparison & Contrast</h3>
+                <p class="text-center text-gray-500 mb-8 font-medium">Choose the word that best completes the sentence.</p>
+                <div id="mc-progress-bar-container" class="w-full bg-gray-100 rounded-full h-3 mb-6">
+                    <div id="mc-progress-bar" class="bg-[#22c55e] h-3 rounded-full transition-all duration-300 shadow-inner" style="width: 0%"></div>
                 </div>
-                <div class="flex justify-between mb-6 text-sm font-bold text-[#558b2f]">
+                <div class="flex justify-between mb-6 text-sm font-bold text-gray-500 uppercase tracking-wide">
                     <span id="mc-question-counter">Question 1/13</span>
-                    <span id="mc-score">Score: 0</span>
+                    <span id="mc-score" class="text-[#15803d]">Score: 0</span>
                 </div>
                 <div id="mc-quiz-container">
-                    <p id="mc-question" class="text-xl mb-6 text-center text-gray-700 font-semibold leading-relaxed"></p>
+                    <p id="mc-question" class="text-2xl mb-8 text-center text-gray-800 font-semibold leading-relaxed"></p>
                     <div id="mc-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
-                <div id="mc-feedback" class="mt-6 text-center font-bold text-lg"></div>
+                <div id="mc-feedback" class="mt-8 text-center font-bold text-xl h-8"></div>
                 <div class="flex justify-center mt-8 space-x-4">
-                    <button id="mc-check-btn" class="bg-[#558b2f] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#33691e] transition shadow-md uppercase tracking-wider">Check</button>
-                    <button id="mc-next-btn" class="bg-[#8bc34a] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#7cb342] transition shadow-md hidden uppercase tracking-wider">Next</button>
+                    <button id="mc-check-btn" class="bg-[#16a34a] text-white font-black py-4 px-10 rounded-full hover:bg-[#15803d] transition shadow-lg uppercase tracking-wider">Check Answer</button>
+                    <button id="mc-next-btn" class="bg-[#22c55e] text-white font-black py-4 px-10 rounded-full hover:bg-[#16a34a] transition shadow-lg hidden uppercase tracking-wider">Next Question</button>
                 </div>
-                <div id="mc-results" class="hidden text-center mt-8 p-6 bg-[#f2f9f1] rounded-xl border border-[#e1f0db]">
-                    <h3 class="text-3xl font-black text-[#558b2f] mb-2 italic">Quiz Complete!</h3>
-                    <p class="text-lg mt-2 font-medium text-gray-700">Your final score is <span id="mc-final-score" class="font-black text-[#558b2f] text-2xl"></span>.</p>
-                    <button id="mc-restart-btn" class="mt-6 bg-white text-[#558b2f] font-extrabold py-3 px-8 rounded-lg hover:bg-gray-100 transition shadow-md border-2 border-[#558b2f] uppercase tracking-wider">Restart Quiz</button>
+                <div id="mc-results" class="hidden text-center mt-8 bg-[#f0fdf4] p-8 rounded-2xl border border-[#bbf7d0]">
+                    <h3 class="text-4xl font-black text-[#15803d] mb-4">Quiz Complete!</h3>
+                    <p class="text-xl mt-2 text-gray-700">Your final score is <span id="mc-final-score" class="font-black text-[#16a34a] text-3xl"></span>.</p>
+                    <button id="mc-restart-btn" class="mt-8 bg-white text-[#16a34a] border-2 border-[#16a34a] font-black py-3 px-8 rounded-full hover:bg-[#f0fdf4] transition shadow-md uppercase tracking-wider">Restart Quiz</button>
                 </div>
-                 <div class="border-t mt-8 pt-4 text-center border-[#e1f0db]">
-                    <button class="back-to-hub-btn text-[#7cb342] hover:text-[#558b2f] font-bold uppercase tracking-wider text-sm">‹ Back to Menu</button>
+                 <div class="mt-10 text-center">
+                    <button class="back-to-hub-btn text-gray-400 hover:text-[#16a34a] font-bold uppercase tracking-wider text-sm transition">‹ Back to Menu</button>
                 </div>
             </div>
         </section>
 
         <!-- Unscramble Section -->
-        <section id="activity-gap" class="activity-section">
-            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto border-4 border-[#e1f0db]">
-                 <h2 class="text-3xl font-black text-center mb-2 text-[#558b2f] italic">Unscramble the Words</h2>
-                 <h3 class="text-xl font-bold text-center text-[#7cb342] mb-4 uppercase tracking-wider">Likes & Dislikes</h3>
-                 <p class="text-center text-gray-500 mb-8 font-medium">Unscramble the letters and type the correct word or phrase to complete the sentence.</p>
-                <div id="gap-container" class="bg-[#f2f9f1] p-6 rounded-xl border border-[#e1f0db]">
-                    <p id="gap-sentence" class="text-xl mb-6 text-center leading-relaxed text-gray-700"></p>
+        <section id="activity-gap" class="activity-section relative z-10">
+            <div class="bg-white p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto border border-gray-100">
+                 <h2 class="text-4xl font-black text-center mb-2 text-gray-900">Unscramble the Words</h2>
+                 <h3 class="text-xl font-bold text-center text-[#22c55e] mb-6 uppercase tracking-widest">Likes & Dislikes</h3>
+                 <p class="text-center text-gray-500 mb-10 font-medium">Unscramble the letters and type the correct word or phrase.</p>
+                <div id="gap-container" class="bg-[#f0fdf4] p-8 rounded-2xl border border-[#bbf7d0]">
+                    <p id="gap-sentence" class="text-2xl mb-8 text-center leading-relaxed text-gray-800"></p>
                     <div class="flex justify-center">
-                        <input type="text" id="gap-input" class="border-2 border-[#8bc34a] bg-white p-3 rounded-lg w-2/3 text-center text-xl font-bold text-[#33691e] focus:border-[#558b2f] outline-none transition placeholder-[#8bc34a]" placeholder="Type answer...">
+                        <input type="text" id="gap-input" class="border-b-4 border-[#22c55e] bg-transparent py-3 px-4 w-2/3 text-center text-3xl font-black text-[#15803d] focus:border-[#15803d] outline-none transition placeholder-green-200" placeholder="Type answer...">
                     </div>
                 </div>
-                <div id="gap-feedback" class="mt-6 text-center font-bold text-lg"></div>
+                <div id="gap-feedback" class="mt-8 text-center font-bold text-xl h-8"></div>
                 <div class="flex justify-center mt-8 space-x-4">
-                    <button id="gap-check-btn" class="bg-[#558b2f] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#33691e] transition shadow-md uppercase tracking-wider">Check</button>
-                    <button id="gap-next-btn" class="bg-[#8bc34a] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#7cb342] transition shadow-md hidden uppercase tracking-wider">Next</button>
+                    <button id="gap-check-btn" class="bg-[#22c55e] text-white font-black py-4 px-10 rounded-full hover:bg-[#16a34a] transition shadow-lg uppercase tracking-wider">Check</button>
+                    <button id="gap-next-btn" class="bg-[#4ade80] text-gray-900 font-black py-4 px-10 rounded-full hover:bg-[#22c55e] hover:text-white transition shadow-lg hidden uppercase tracking-wider">Next</button>
                 </div>
-                 <div id="gap-results" class="hidden text-center mt-8 p-6 bg-[#f2f9f1] rounded-xl border border-[#e1f0db]">
-                    <h3 class="text-3xl font-black text-[#558b2f] mb-2 italic">Activity Complete!</h3>
-                    <p class="text-lg mt-2 font-medium text-gray-700">Great work on the unscramble exercise.</p>
-                    <button id="gap-restart-btn" class="mt-6 bg-white text-[#558b2f] font-extrabold py-3 px-8 rounded-lg hover:bg-gray-100 transition shadow-md border-2 border-[#558b2f] uppercase tracking-wider">Start Over</button>
+                 <div id="gap-results" class="hidden text-center mt-8 bg-[#f0fdf4] p-8 rounded-2xl border border-[#bbf7d0]">
+                    <h3 class="text-4xl font-black text-[#15803d] mb-4">Activity Complete!</h3>
+                    <p class="text-xl text-gray-700">Great work on the unscramble exercise.</p>
+                    <button id="gap-restart-btn" class="mt-8 bg-white text-[#22c55e] border-2 border-[#22c55e] font-black py-3 px-8 rounded-full hover:bg-[#f0fdf4] transition shadow-md uppercase tracking-wider">Start Over</button>
                 </div>
-                <div class="border-t mt-8 pt-4 text-center border-[#e1f0db]">
-                    <button class="back-to-hub-btn text-[#7cb342] hover:text-[#558b2f] font-bold uppercase tracking-wider text-sm">‹ Back to Menu</button>
+                <div class="mt-10 text-center">
+                    <button class="back-to-hub-btn text-gray-400 hover:text-[#22c55e] font-bold uppercase tracking-wider text-sm transition">‹ Back to Menu</button>
                 </div>
             </div>
         </section>
 
         <!-- Sorting Section -->
-        <section id="activity-sort" class="activity-section">
-            <div class="bg-white p-8 rounded-xl shadow-lg max-w-6xl mx-auto border-4 border-[#e1f0db]">
-                <h2 class="text-3xl font-black text-center mb-2 text-[#558b2f] italic">Action Word Sorting</h2>
+        <section id="activity-sort" class="activity-section relative z-10">
+            <div class="bg-white p-10 rounded-3xl shadow-2xl max-w-6xl mx-auto border border-gray-100">
+                <h2 class="text-4xl font-black text-center mb-2 text-gray-900">Action Word Sorting</h2>
                  <p class="text-center text-gray-500 mb-8 font-medium">Drag the words from the bank into the correct category boxes below.</p>
 
-                <div class="bg-[#f2f9f1] p-6 rounded-xl border border-[#e1f0db] mb-8">
-                    <h3 class="font-bold text-sm uppercase tracking-widest mb-4 text-center text-[#689f38]">Word Bank</h3>
-                    <div id="sort-words-bank" class="flex flex-wrap gap-2 justify-center">
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 mb-10 shadow-inner">
+                    <h3 class="font-black text-lg mb-4 text-center text-gray-400 uppercase tracking-widest">Word Bank</h3>
+                    <div id="sort-words-bank">
                         <!-- Words will be injected here -->
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Categories -->
-                    <div id="sort-cat-1" data-category="arms_hands" class="sort-drop-zone p-6 bg-[#8bc34a] rounded-xl border-4 border-white drop-target shadow-inner">
-                        <h3 class="font-black text-xl mb-4 text-center text-white italic tracking-wide drop-shadow-md">Arms & Hands</h3>
+                    <div id="sort-cat-1" data-category="arms_hands" class="sort-drop-zone p-6 bg-[#dcfce7] rounded-2xl border-4 border-white drop-target shadow-md">
+                        <h3 class="font-black text-xl mb-4 text-center text-[#166534] uppercase tracking-wide">Arms & Hands</h3>
                         <div class="flex flex-wrap gap-2 justify-center"></div>
                     </div>
-                     <div id="sort-cat-2" data-category="mouth_nose" class="sort-drop-zone p-6 bg-[#7cb342] rounded-xl border-4 border-white drop-target shadow-inner">
-                        <h3 class="font-black text-xl mb-4 text-center text-white italic tracking-wide drop-shadow-md">Mouth & Nose</h3>
+                     <div id="sort-cat-2" data-category="mouth_nose" class="sort-drop-zone p-6 bg-[#bbf7d0] rounded-2xl border-4 border-white drop-target shadow-md">
+                        <h3 class="font-black text-xl mb-4 text-center text-[#15803d] uppercase tracking-wide">Mouth & Nose</h3>
                         <div class="flex flex-wrap gap-2 justify-center"></div>
                     </div>
-                     <div id="sort-cat-3" data-category="feet_legs" class="sort-drop-zone p-6 bg-[#689f38] rounded-xl border-4 border-white drop-target shadow-inner">
-                        <h3 class="font-black text-xl mb-4 text-center text-white italic tracking-wide drop-shadow-md">Feet & Legs</h3>
+                     <div id="sort-cat-3" data-category="feet_legs" class="sort-drop-zone p-6 bg-[#86efac] rounded-2xl border-4 border-white drop-target shadow-md">
+                        <h3 class="font-black text-xl mb-4 text-center text-[#16a34a] uppercase tracking-wide">Feet & Legs</h3>
                         <div class="flex flex-wrap gap-2 justify-center"></div>
                     </div>
-                     <div id="sort-cat-4" data-category="eyes" class="sort-drop-zone p-6 bg-[#9ccc65] rounded-xl border-4 border-white drop-target shadow-inner">
-                        <h3 class="font-black text-xl mb-4 text-center text-white italic tracking-wide drop-shadow-md">Eyes</h3>
+                     <div id="sort-cat-4" data-category="eyes" class="sort-drop-zone p-6 bg-[#4ade80] rounded-2xl border-4 border-white drop-target shadow-md">
+                        <h3 class="font-black text-xl mb-4 text-center text-white uppercase tracking-wide">Eyes</h3>
                         <div class="flex flex-wrap gap-2 justify-center"></div>
                     </div>
                 </div>
 
-                 <div id="sort-feedback" class="mt-8 text-center font-bold text-xl h-8"></div>
+                 <div id="sort-feedback" class="mt-10 text-center font-bold text-2xl h-8 text-[#15803d]"></div>
 
-                <div class="text-center mt-8">
-                    <button id="sort-check-btn" class="bg-[#558b2f] text-white font-extrabold py-3 px-10 rounded-lg hover:bg-[#33691e] transition shadow-lg text-lg uppercase tracking-wider">Check My Answers</button>
-                    <button id="sort-restart-btn" class="ml-4 bg-white text-[#558b2f] font-extrabold py-3 px-10 rounded-lg hover:bg-gray-100 transition shadow-lg text-lg border-2 border-[#558b2f] hidden uppercase tracking-wider">Play Again</button>
+                <div class="text-center mt-10">
+                    <button id="sort-check-btn" class="bg-gray-900 text-white font-black py-4 px-12 rounded-full hover:bg-gray-700 transition shadow-xl uppercase tracking-widest text-lg">Check My Answers</button>
+                    <button id="sort-restart-btn" class="ml-4 bg-white text-[#16a34a] border-2 border-[#16a34a] font-black py-4 px-12 rounded-full hover:bg-[#f0fdf4] transition shadow-xl hidden uppercase tracking-widest text-lg">Play Again</button>
                 </div>
-                 <div class="border-t mt-10 pt-4 text-center border-[#e1f0db]">
-                    <button class="back-to-hub-btn text-[#7cb342] hover:text-[#558b2f] font-bold uppercase tracking-wider text-sm">‹ Back to Menu</button>
+                 <div class="mt-12 text-center">
+                    <button class="back-to-hub-btn text-gray-400 hover:text-[#16a34a] font-bold uppercase tracking-wider text-sm transition">‹ Back to Menu</button>
                 </div>
             </div>
         </section>
 
         <!-- Sentence Completion Section -->
-        <section id="activity-sentence" class="activity-section">
-            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto border-4 border-[#e1f0db]">
-                 <h2 class="text-3xl font-black text-center mb-2 text-[#558b2f] italic">Sentence Completion</h2>
-                 <p class="text-center text-gray-500 mb-8 font-medium">Complete the sentence with the most appropriate action word, changing the form if necessary.</p>
-                <div id="sentence-container" class="bg-[#f2f9f1] p-6 rounded-xl border border-[#e1f0db]">
-                    <p id="sentence-question" class="text-xl mb-6 text-center leading-relaxed text-gray-700 font-semibold"></p>
+        <section id="activity-sentence" class="activity-section relative z-10">
+            <div class="bg-white p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto border border-gray-100">
+                 <h2 class="text-4xl font-black text-center mb-2 text-gray-900">Sentence Completion</h2>
+                 <p class="text-center text-gray-500 mb-10 font-medium">Complete the sentence with the most appropriate action word.</p>
+                <div id="sentence-container" class="bg-[#f0fdf4] p-8 rounded-2xl border border-[#bbf7d0]">
+                    <p id="sentence-question" class="text-2xl mb-8 text-center leading-relaxed text-gray-800 font-semibold"></p>
                     <div class="flex justify-center">
-                        <input type="text" id="sentence-input" class="border-b-4 border-[#8bc34a] bg-white py-2 px-4 rounded-t-lg w-2/3 text-center text-xl font-bold text-[#558b2f] focus:border-[#558b2f] outline-none transition placeholder-[#e1f0db]" placeholder="Type word here...">
+                        <input type="text" id="sentence-input" class="border-b-4 border-[#16a34a] bg-transparent py-2 px-4 w-2/3 text-center text-3xl font-black text-[#15803d] focus:border-[#15803d] outline-none transition placeholder-green-200">
                     </div>
                 </div>
-                <div id="sentence-feedback" class="mt-6 text-center font-bold text-lg"></div>
+                <div id="sentence-feedback" class="mt-8 text-center font-bold text-xl h-8"></div>
                 <div class="flex justify-center mt-8 space-x-4">
-                    <button id="sentence-check-btn" class="bg-[#558b2f] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#33691e] transition shadow-md uppercase tracking-wider">Check</button>
-                    <button id="sentence-next-btn" class="bg-[#8bc34a] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#7cb342] transition shadow-md hidden uppercase tracking-wider">Next</button>
+                    <button id="sentence-check-btn" class="bg-[#16a34a] text-white font-black py-4 px-10 rounded-full hover:bg-[#15803d] transition shadow-lg uppercase tracking-wider">Check</button>
+                    <button id="sentence-next-btn" class="bg-[#22c55e] text-white font-black py-4 px-10 rounded-full hover:bg-[#16a34a] transition shadow-lg hidden uppercase tracking-wider">Next</button>
                 </div>
-                 <div id="sentence-results" class="hidden text-center mt-8 p-6 bg-[#f2f9f1] rounded-xl border border-[#e1f0db]">
-                    <h3 class="text-3xl font-black text-[#558b2f] mb-2 italic">Activity Complete!</h3>
-                    <p class="text-lg mt-2 font-medium text-gray-700">Excellent work with the sentences.</p>
-                    <button id="sentence-restart-btn" class="mt-6 bg-white text-[#558b2f] font-extrabold py-3 px-8 rounded-lg hover:bg-gray-100 transition shadow-md border-2 border-[#558b2f] uppercase tracking-wider">Start Over</button>
+                 <div id="sentence-results" class="hidden text-center mt-8 bg-[#f0fdf4] p-8 rounded-2xl border border-[#bbf7d0]">
+                    <h3 class="text-4xl font-black text-[#15803d] mb-4">Activity Complete!</h3>
+                    <p class="text-xl text-gray-700">Excellent work with the sentences.</p>
+                    <button id="sentence-restart-btn" class="mt-8 bg-white text-[#16a34a] border-2 border-[#16a34a] font-black py-3 px-8 rounded-full hover:bg-[#f0fdf4] transition shadow-md uppercase tracking-wider">Start Over</button>
                 </div>
-                <div class="border-t mt-8 pt-4 text-center border-[#e1f0db]">
-                    <button class="back-to-hub-btn text-[#7cb342] hover:text-[#558b2f] font-bold uppercase tracking-wider text-sm">‹ Back to Menu</button>
+                <div class="mt-10 text-center">
+                    <button class="back-to-hub-btn text-gray-400 hover:text-[#16a34a] font-bold uppercase tracking-wider text-sm transition">‹ Back to Menu</button>
                 </div>
             </div>
         </section>
         
         <!-- Confusing Words Section -->
-        <section id="activity-confusing" class="activity-section">
-            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto border-4 border-[#e1f0db]">
-                 <h2 class="text-3xl font-black text-center mb-2 text-[#558b2f] italic">Confusing Words</h2>
-                 <p class="text-center text-gray-500 mb-8 font-medium">Choose the correct word to complete the sentence.</p>
-                <div id="confusing-container" class="bg-[#f2f9f1] p-6 rounded-xl border border-[#e1f0db]">
-                    <p id="confusing-question" class="text-xl mb-8 text-center leading-relaxed text-gray-700 font-semibold"></p>
-                    <div id="confusing-options" class="flex justify-center gap-4">
+        <section id="activity-confusing" class="activity-section relative z-10">
+            <div class="bg-[#16a34a] p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto text-white">
+                 <h2 class="text-4xl font-black text-center mb-2 text-white drop-shadow-md">Confusing Words</h2>
+                 <p class="text-center text-green-100 mb-10 font-medium">Choose the correct word to complete the sentence.</p>
+                <div id="confusing-container" class="bg-white/10 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+                    <p id="confusing-question" class="text-2xl mb-8 text-center leading-relaxed font-semibold"></p>
+                    <div id="confusing-options" class="flex justify-center gap-6">
                         <!-- Option buttons will be injected here -->
                     </div>
                 </div>
-                <div id="confusing-feedback" class="mt-6 text-center font-bold text-lg"></div>
+                <div id="confusing-feedback" class="mt-8 text-center font-bold text-2xl h-8 drop-shadow-md"></div>
                 <div class="flex justify-center mt-8">
-                    <button id="confusing-next-btn" class="bg-[#8bc34a] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#7cb342] transition shadow-md hidden uppercase tracking-wider w-full md:w-auto">Next Pair</button>
+                    <button id="confusing-next-btn" class="bg-white text-[#16a34a] font-black py-4 px-10 rounded-full hover:bg-gray-100 transition shadow-xl hidden uppercase tracking-wider">Next Pair</button>
                 </div>
-                 <div id="confusing-results" class="hidden text-center mt-8 p-6 bg-[#f2f9f1] rounded-xl border border-[#e1f0db]">
-                    <h3 class="text-3xl font-black text-[#558b2f] mb-2 italic">Activity Complete!</h3>
-                     <p class="text-lg mt-2 font-medium text-gray-700">Your final score is <span id="confusing-final-score" class="font-black text-[#558b2f] text-2xl"></span>.</p>
-                    <button id="confusing-restart-btn" class="mt-6 bg-white text-[#558b2f] font-extrabold py-3 px-8 rounded-lg hover:bg-gray-100 transition shadow-md border-2 border-[#558b2f] uppercase tracking-wider">Start Over</button>
+                 <div id="confusing-results" class="hidden text-center mt-8 bg-white/10 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+                    <h3 class="text-4xl font-black text-white mb-4 drop-shadow-md">Activity Complete!</h3>
+                     <p class="text-xl text-green-50 mt-2">Your final score is <span id="confusing-final-score" class="font-black text-white text-3xl"></span>.</p>
+                    <button id="confusing-restart-btn" class="mt-8 bg-white text-[#16a34a] font-black py-3 px-8 rounded-full hover:bg-gray-100 transition shadow-lg uppercase tracking-wider">Start Over</button>
                 </div>
-                <div class="border-t mt-8 pt-4 text-center border-[#e1f0db]">
-                    <button class="back-to-hub-btn text-[#7cb342] hover:text-[#558b2f] font-bold uppercase tracking-wider text-sm">‹ Back to Menu</button>
+                <div class="mt-10 text-center">
+                    <button class="back-to-hub-btn text-green-200 hover:text-white font-bold uppercase tracking-wider text-sm transition">‹ Back to Menu</button>
                 </div>
             </div>
         </section>
 
         <!-- Make, Do, Take Section -->
-        <section id="activity-mdt" class="activity-section">
-            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto border-4 border-[#e1f0db]">
-                 <h2 class="text-3xl font-black text-center mb-2 text-[#558b2f] italic">Make, Do & Take</h2>
-                 <p class="text-center text-gray-500 mb-8 font-medium">Complete the sentences with the correct form of 'make', 'do', or 'take'.</p>
-                <div id="mdt-container" class="bg-[#f2f9f1] p-6 rounded-xl border border-[#e1f0db]">
-                    <p id="mdt-question" class="text-xl mb-4 text-center leading-relaxed text-gray-700 font-semibold"></p>
+        <section id="activity-mdt" class="activity-section relative z-10">
+            <div class="bg-white p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto border-t-8 border-[#15803d]">
+                 <h2 class="text-4xl font-black text-center mb-2 text-gray-900">Make, Do & Take</h2>
+                 <p class="text-center text-gray-500 mb-10 font-medium">Complete the sentences with the correct form of 'make', 'do', or 'take'.</p>
+                <div id="mdt-container" class="bg-gray-50 p-8 rounded-2xl border border-gray-200">
+                    <p id="mdt-question" class="text-2xl mb-4 text-center leading-relaxed text-gray-800 font-semibold"></p>
                 </div>
-                <div id="mdt-feedback" class="mt-6 text-center font-bold text-lg"></div>
+                <div id="mdt-feedback" class="mt-8 text-center font-bold text-xl h-8"></div>
                 <div class="flex justify-center mt-8 space-x-4">
-                    <button id="mdt-check-btn" class="bg-[#558b2f] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#33691e] transition shadow-md uppercase tracking-wider">Check</button>
-                    <button id="mdt-next-btn" class="bg-[#8bc34a] text-white font-extrabold py-3 px-8 rounded-lg hover:bg-[#7cb342] transition shadow-md hidden uppercase tracking-wider">Next</button>
+                    <button id="mdt-check-btn" class="bg-[#15803d] text-white font-black py-4 px-10 rounded-full hover:bg-[#166534] transition shadow-lg uppercase tracking-wider">Check Answer</button>
+                    <button id="mdt-next-btn" class="bg-[#16a34a] text-white font-black py-4 px-10 rounded-full hover:bg-[#15803d] transition shadow-lg hidden uppercase tracking-wider">Next Question</button>
                 </div>
-                 <div id="mdt-results" class="hidden text-center mt-8 p-6 bg-[#f2f9f1] rounded-xl border border-[#e1f0db]">
-                    <h3 class="text-3xl font-black text-[#558b2f] mb-2 italic">Activity Complete!</h3>
-                     <p class="text-lg mt-2 font-medium text-gray-700">Your final score is <span id="mdt-final-score" class="font-black text-[#558b2f] text-2xl"></span>.</p>
-                    <button id="mdt-restart-btn" class="mt-6 bg-white text-[#558b2f] font-extrabold py-3 px-8 rounded-lg hover:bg-gray-100 transition shadow-md border-2 border-[#558b2f] uppercase tracking-wider">Start Over</button>
+                 <div id="mdt-results" class="hidden text-center mt-8 bg-[#f0fdf4] p-8 rounded-2xl border border-[#bbf7d0]">
+                    <h3 class="text-4xl font-black text-[#15803d] mb-4">Activity Complete!</h3>
+                     <p class="text-xl text-gray-700 mt-2">Your final score is <span id="mdt-final-score" class="font-black text-[#16a34a] text-3xl"></span>.</p>
+                    <button id="mdt-restart-btn" class="mt-8 bg-white text-[#15803d] border-2 border-[#15803d] font-black py-3 px-8 rounded-full hover:bg-[#f0fdf4] transition shadow-md uppercase tracking-wider">Start Over</button>
                 </div>
-                <div class="border-t mt-8 pt-4 text-center border-[#e1f0db]">
-                    <button class="back-to-hub-btn text-[#7cb342] hover:text-[#558b2f] font-bold uppercase tracking-wider text-sm">‹ Back to Menu</button>
+                <div class="mt-10 text-center">
+                    <button class="back-to-hub-btn text-gray-400 hover:text-[#15803d] font-bold uppercase tracking-wider text-sm transition">‹ Back to Menu</button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="text-center py-6 mt-8 border-t-2 border-[#e1f0db] bg-white">
-        <p class="text-[#7cb342] font-medium">&copy; 2025 FCE Vocabulary Tester. Happy learning!</p>
+    <footer class="bg-[#16a34a] text-white text-center py-8 mt-12">
+        <p class="font-bold tracking-wide uppercase text-sm">&copy; 2026 Green Wealth Vocab. Make an Impact.</p>
     </footer>
 
     <script>
@@ -491,14 +499,14 @@
                 current.options.forEach(option => {
                     const button = document.createElement('button');
                     button.textContent = option;
-                    button.className = 'p-4 border-2 border-[#e1f0db] bg-white rounded-xl text-left font-bold text-gray-700 hover:border-[#9ccc65] hover:bg-[#f2f9f1] transition focus:outline-none';
+                    button.className = 'p-5 border-2 border-gray-200 rounded-xl text-left font-bold text-gray-700 hover:border-[#4ade80] hover:bg-[#f0fdf4] transition focus:outline-none focus:ring-4 focus:ring-[#bbf7d0] text-lg';
                     button.onclick = () => {
                         document.querySelectorAll('#mc-options button').forEach(btn => {
-                            btn.classList.remove('bg-[#8bc34a]', 'border-[#558b2f]', 'text-white');
-                            btn.classList.add('bg-white', 'text-gray-700');
+                            btn.classList.remove('bg-[#22c55e]', 'border-[#16a34a]', 'text-white', 'hover:border-[#4ade80]', 'hover:bg-[#f0fdf4]');
+                            btn.classList.add('bg-white', 'text-gray-700', 'hover:border-[#4ade80]', 'hover:bg-[#f0fdf4]');
                         });
-                        button.classList.remove('bg-white', 'text-gray-700');
-                        button.classList.add('bg-[#8bc34a]', 'border-[#558b2f]', 'text-white');
+                        button.classList.remove('bg-white', 'text-gray-700', 'hover:border-[#4ade80]', 'hover:bg-[#f0fdf4]');
+                        button.classList.add('bg-[#22c55e]', 'border-[#16a34a]', 'text-white');
                     };
                     mcElements.options.appendChild(button);
                 });
@@ -510,10 +518,10 @@
             }
             mcElements.checkBtn.addEventListener('click', () => {
                 const s = state.mc;
-                const selectedOption = document.querySelector('#mc-options button.bg-\\[\\#8bc34a\\]');
+                const selectedOption = document.querySelector('#mc-options button.bg-\\[\\#22c55e\\]');
                 if (!selectedOption) {
                     mcElements.feedback.textContent = 'Please select an answer!';
-                    mcElements.feedback.className = 'mt-6 text-center font-bold text-[#558b2f] animate-pulse';
+                    mcElements.feedback.className = 'mt-8 text-center font-black text-red-500 text-xl h-8 animate-bounce';
                     return;
                 }
                 const answer = selectedOption.textContent;
@@ -521,18 +529,18 @@
                 if (answer === correctAnswer) {
                     s.score++;
                     mcElements.feedback.textContent = 'Correct!';
-                    mcElements.feedback.className = 'mt-6 text-center font-black text-green-500 text-xl italic';
-                    selectedOption.classList.remove('bg-[#8bc34a]', 'border-[#558b2f]');
-                    selectedOption.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                    mcElements.feedback.className = 'mt-8 text-center font-black text-[#16a34a] text-2xl h-8';
+                    selectedOption.classList.remove('bg-[#22c55e]', 'border-[#16a34a]');
+                    selectedOption.classList.add('bg-[#15803d]', 'border-[#14532d]');
                 } else {
                     mcElements.feedback.textContent = `Incorrect. The correct answer is "${correctAnswer}".`;
-                    mcElements.feedback.className = 'mt-6 text-center font-black text-red-500 text-xl italic';
-                    selectedOption.classList.remove('bg-[#8bc34a]', 'border-[#558b2f]');
-                    selectedOption.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
-                    // Highlight correct answer
+                    mcElements.feedback.className = 'mt-8 text-center font-black text-red-500 text-xl h-8';
+                    selectedOption.classList.remove('bg-[#22c55e]', 'border-[#16a34a]');
+                    selectedOption.classList.add('bg-red-500', 'border-red-700');
+                    
                     document.querySelectorAll('#mc-options button').forEach(btn => {
                         if(btn.textContent === correctAnswer) {
-                             btn.classList.add('border-green-500', 'text-green-700', 'bg-green-50');
+                             btn.classList.add('border-[#16a34a]', 'text-[#15803d]', 'bg-[#dcfce7]', 'border-4');
                         }
                     });
                 }
@@ -889,7 +897,7 @@
                     return;
                 }
                 const current = s.questions[s.currentIndex];
-                confusingElements.question.innerHTML = `${current.q_start} <span class="border-b-2 border-dashed border-[#9ccc65] w-16 inline-block mx-2"></span> ${current.q_end}`;
+                confusingElements.question.innerHTML = `${current.q_start} <span class="font-bold text-green-200 border-b-2 border-dashed border-green-200 w-16 inline-block mx-2">[...]</span> ${current.q_end}`;
                 confusingElements.options.innerHTML = '';
                 confusingElements.feedback.textContent = '';
                 confusingElements.nextBtn.classList.add('hidden');
@@ -897,7 +905,7 @@
                 current.options.forEach(option => {
                     const button = document.createElement('button');
                     button.textContent = option;
-                    button.className = 'py-3 px-6 border-2 border-[#e1f0db] bg-white rounded-xl hover:border-[#9ccc65] hover:bg-[#f2f9f1] transition font-bold text-gray-700 min-w-[120px]';
+                    button.className = 'py-4 px-8 border-4 border-white/30 bg-white/10 rounded-full hover:bg-white hover:text-[#16a34a] transition font-black text-white text-xl shadow-lg';
                     button.onclick = (e) => checkConfusingAnswer(e.target);
                     confusingElements.options.appendChild(button);
                 });
@@ -912,30 +920,30 @@
                     b.disabled = true;
                     b.classList.add('opacity-50', 'cursor-not-allowed');
                 });
-                selectedButton.classList.remove('opacity-50');
+                selectedButton.classList.remove('opacity-50', 'hover:bg-white', 'hover:text-[#16a34a]');
 
                 if (userAnswer === correctAnswer) {
                     s.score++;
-                    selectedButton.classList.add('bg-[#8bc34a]', 'border-[#558b2f]', 'text-white');
-                    selectedButton.classList.remove('bg-white', 'text-gray-700');
+                    selectedButton.classList.add('bg-white', 'text-[#16a34a]', 'border-white');
+                    selectedButton.classList.remove('bg-white/10', 'text-white', 'border-white/30');
                     confusingElements.feedback.textContent = 'Correct!';
-                    confusingElements.feedback.className = 'mt-6 text-center font-black text-green-500 text-xl italic';
+                    confusingElements.feedback.className = 'mt-8 text-center font-black text-white text-3xl h-8 drop-shadow-md';
                 } else {
-                    selectedButton.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
-                    selectedButton.classList.remove('bg-white', 'text-gray-700');
+                    selectedButton.classList.add('bg-red-500', 'text-white', 'border-red-600');
+                    selectedButton.classList.remove('bg-white/10', 'text-white', 'border-white/30');
                     confusingElements.feedback.textContent = `Not quite.`;
-                    confusingElements.feedback.className = 'mt-6 text-center font-black text-red-500 text-xl italic';
+                    confusingElements.feedback.className = 'mt-8 text-center font-black text-red-200 text-2xl h-8 drop-shadow-md';
                     
-                     document.querySelectorAll('#confusing-options button').forEach(b => {
+                    document.querySelectorAll('#confusing-options button').forEach(b => {
                         if(b.textContent === correctAnswer) {
-                             b.classList.remove('opacity-50', 'border-[#e1f0db]', 'text-gray-700');
-                             b.classList.add('border-green-500', 'text-green-700', 'bg-green-50');
+                             b.classList.remove('opacity-50', 'bg-white/10', 'border-white/30');
+                             b.classList.add('bg-white', 'text-[#16a34a]', 'border-white', 'scale-110');
                         }
                     });
                 }
                 
                 const current = s.questions[s.currentIndex];
-                confusingElements.question.innerHTML = `${current.q_start} <span class="font-bold text-[#558b2f] underline decoration-2 underline-offset-4 mx-1">${correctAnswer}</span> ${current.q_end}`;
+                confusingElements.question.innerHTML = `${current.q_start} <span class="font-black text-white underline decoration-4 underline-offset-4 mx-2">${correctAnswer}</span> ${current.q_end}`;
 
                 confusingElements.nextBtn.classList.remove('hidden');
             }
@@ -986,19 +994,14 @@
                 let questionHtml = current.q;
                 
                 // Replace placeholders with input fields
-                let inputCounter = 0;
                 questionHtml = questionHtml.replace(/___/g, () => {
-                    return `<input type="text" autocomplete="off" class="mdt-input border-b-2 border-[#9ccc65] bg-transparent focus:border-[#558b2f] outline-none text-center w-24 mx-1 font-bold text-[#558b2f] transition">`;
+                    return `<input type="text" autocomplete="off" class="mdt-input border-b-4 border-gray-300 bg-transparent focus:border-[#15803d] outline-none text-center w-28 mx-2 font-black text-[#15803d] transition text-2xl">`;
                 });
 
                 mdtElements.question.innerHTML = questionHtml;
                 mdtElements.feedback.textContent = '';
                 mdtElements.checkBtn.classList.remove('hidden');
                 mdtElements.nextBtn.classList.add('hidden');
-                setTimeout(() => {
-                    const firstInput = document.querySelector('.mdt-input');
-                    if (firstInput) firstInput.focus();
-                }, 100);
             }
 
             function showMdtResults() {
@@ -1025,7 +1028,7 @@
                 
                 if(emptyFields) {
                      mdtElements.feedback.textContent = 'Please fill in all the blanks.';
-                     mdtElements.feedback.className = 'mt-6 text-center font-bold text-[#558b2f] animate-pulse';
+                     mdtElements.feedback.className = 'mt-8 text-center font-black text-red-500 text-xl h-8 animate-bounce';
                      return;
                 }
 
@@ -1034,11 +1037,11 @@
                     const correctAnswer = currentAnswers[index].toLowerCase();
                     input.disabled = true;
                     if (userAnswer === correctAnswer) {
-                        input.classList.add('border-emerald-500', 'text-emerald-600');
-                        input.classList.remove('border-[#9ccc65]');
+                        input.classList.add('border-[#16a34a]', 'text-[#15803d]');
+                        input.classList.remove('border-gray-300');
                     } else {
                         input.classList.add('border-red-500', 'text-red-600', 'line-through');
-                        input.classList.remove('border-[#9ccc65]');
+                        input.classList.remove('border-gray-300');
                         allCorrect = false;
                     }
                 });
@@ -1046,10 +1049,10 @@
                 if (allCorrect) {
                     s.score++;
                     mdtElements.feedback.textContent = 'Correct!';
-                    mdtElements.feedback.className = 'mt-6 text-center font-black text-green-500 text-xl italic';
+                    mdtElements.feedback.className = 'mt-8 text-center font-black text-[#16a34a] text-3xl h-8';
                 } else {
-                    mdtElements.feedback.innerHTML = `Not quite. The correct phrase is: <br> <span class="text-[#558b2f] font-black tracking-wide mt-2 inline-block">${currentAnswers.join(' ').toUpperCase()}</span>`;
-                    mdtElements.feedback.className = 'mt-6 text-center font-black text-red-500 text-xl italic';
+                    mdtElements.feedback.innerHTML = `Not quite. The correct phrase is: <br> <span class="text-[#15803d] font-black tracking-wide mt-3 inline-block text-3xl">${currentAnswers.join(' ').toUpperCase()}</span>`;
+                    mdtElements.feedback.className = 'mt-8 text-center font-bold text-red-500 text-xl';
                 }
 
                 mdtElements.checkBtn.classList.add('hidden');
